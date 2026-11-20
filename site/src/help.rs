@@ -13,6 +13,7 @@ const DOWNLOAD: &str = "https://murmint.app/download";
 
 pub const NAMES: &[&str] = &[
     "faq", "guide", "shortcuts", "keys", "troubleshoot", "tip", "requirements", "privacy", "updates", "roadmap", "changelog", "rate", "testerguide",
+    "clipboard", "voicecommands", "murmint1", "docs", "whatsnew",
 ];
 
 // (key, label, answer)
@@ -142,7 +143,7 @@ pub fn run(name: &str, v: &Value) -> Value {
         },
         "guide" => reply(4, vec![text("## Murmint guide\nPick what you want to learn."), guide_menu()], false),
         "troubleshoot" => reply(4, vec![text("## Troubleshooting\nPick what's going wrong and I'll walk you through it."), trouble_menu()], false),
-        "shortcuts" => reply(4, vec![text("## Shortcuts\n**Ctrl + Win** hold to dictate, or click to start\n**Ctrl + Alt + D** hands-free\n**Esc** cancel\n**Ctrl + Alt + Z** undo the last insertion\n-# Each one can be changed in Settings → Shortcuts, to any combination of keys.")], false),
+        "shortcuts" => reply(4, vec![text("## Shortcuts\n**Ctrl + Win** hold to dictate, or click to start\n**Ctrl + Alt + D** hands-free\n**Esc** cancel\n**Ctrl + Alt + Z** undo the last insertion\n**Ctrl + Alt + F** format the text you selected\n**Win + V** Better Clipboard\n**Win + .** emoji\n-# Each one can be changed in Settings → Shortcuts, to any combination of keys.")], false),
         "keys" => match s_opt(v, "provider") {
             Some(p) => {
                 let (_, label, body) = KEYS.iter().find(|(k, _, _)| *k == p).unwrap_or(&KEYS[0]);
@@ -153,6 +154,34 @@ pub fn run(name: &str, v: &Value) -> Value {
         "tip" => reply(4, vec![text(&format!("## Tip\n{}", TIPS[rand_below(TIPS.len() as u64) as usize]))], true),
         "requirements" => reply(4, vec![text("## What you need\n**Windows 10 or 11, 64-bit.** It installs for your account only and needs no administrator rights.\n**An AI provider key**, or a model on your PC with Ollama or LM Studio. Groq and Cloudflare Workers AI have free tiers.\n**A microphone.**\n-# Windows only for now. Mac and Linux are planned for later, not for the alpha.")], false),
         "privacy" => reply(4, vec![text("## What leaves your PC\n**Audio** goes to the speech provider you picked and is never stored.\n**Text** goes to the formatting provider you picked.\n**Keys** are encrypted with Windows and only sent to their own provider.\n**History** is optional and stays on your PC.\n**Message context** (off by default) also sends the last few hundred characters before your cursor to the formatting provider. Password fields are never read.\nWith a model on your own PC, nothing leaves your computer.\n-# There are no Murmint servers or accounts.")], false),
+        "clipboard" => reply(4, vec![text("## Better Clipboard
+**Win + V** opens everything you copied: text, links, images, files and GIFs. Click one to paste it into the window you were in.
+**Win + .** opens emoji, grouped by category with your recent ones first.
+**Pin** what you paste often, **type to search**, and **drag the top bar** to move it. It opens where you left it.
+What Murmint types for you, and copies apps mark as private, are never kept.
+-# Turn it off under Settings → Typing and Win + V goes back to Windows.")], false),
+        "voicecommands" => reply(4, vec![text("## Say it, Murmint does it
+**new line** / **new paragraph** puts in a break
+**quote … end quote** adds quotation marks
+**press enter**, **hit tab**, **press space**, **press backspace** presses that key while it types
+**comma**, **period**, **question mark** add the mark
+**smiley face**, **thumbs up emoji** type the emoji
+**8:30, no wait, 9** keeps only the 9
+Name three things and you get a list.
+-# \"See you at three, press enter\" types the message and sends it. These need Auto-detect, under Writing.")], false),
+        "murmint1" => reply(4, vec![text("## Murmint 1
+Murmint's own speech model. It runs on your PC, so turning your voice into text is **free, private and works offline**.
+It downloads during setup (about 39 MB) and is the default for everyone. Your AI provider then formats the text.
+-# Switch speech models any time under Models → Speech to text.")], false),
+        "docs" => reply(4, vec![text("## Murmint docs
+Guides for every feature, with pictures: setup, dictating, Better Clipboard, writing styles, apps, vocabulary and providers."), row(vec![crate::bot::link("Open the docs", "https://docs.murmint.app"), crate::bot::link("Quickstart", "https://docs.murmint.app/quickstart"), crate::bot::link("What's new", "https://docs.murmint.app/changelog")])], false),
+        "whatsnew" => reply(4, vec![text("## New in Murmint 5.2
+**Better Clipboard** replaces Win + V, with emoji on Win + .
+**Formatted once, at the end**, so the whole dictation comes out right.
+**Key presses by voice**: \"press enter\", \"hit tab\".
+**Auto-detect** handles new lines, quotes and repeated speech.
+**Windows 11 look**, dark by default, and a new dark installer.
+-# Full notes: `/changelog` or https://docs.murmint.app/changelog")], false),
         "updates" => channel_posts("updates", "Latest updates"),
         "roadmap" => channel_posts("roadmap", "Roadmap"),
         "changelog" => changelog(s_opt(v, "version")),
@@ -429,6 +458,11 @@ pub fn definitions() -> Vec<Value> {
             { "type": 4, "name": "rating", "description": "1 (poor) to 5 (great)", "required": true, "min_value": 1, "max_value": 5 },
             { "type": 3, "name": "comment", "description": "Anything you'd like to add", "max_length": 800 } ] }),
         json!({ "name": "testerguide", "description": "How to be a great alpha tester" }),
+        json!({ "name": "clipboard", "description": "How Better Clipboard works (Win + V and emoji)" }),
+        json!({ "name": "voicecommands", "description": "Things you can say: new line, quotes, press enter and more" }),
+        json!({ "name": "murmint1", "description": "Murmint's own free speech model" }),
+        json!({ "name": "docs", "description": "Open the Murmint documentation" }),
+        json!({ "name": "whatsnew", "description": "What's new in the latest Murmint" }),
     ]
 }
 
