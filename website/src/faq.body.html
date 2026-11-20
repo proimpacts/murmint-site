@@ -1,0 +1,31 @@
+<section class="page-top wrap">
+  <h1><span class="dim">Questions,</span> answered.</h1>
+  <p>Straight answers to what people ask first.</p>
+</section>
+
+<section class="block wrap" style="padding-top:60px">
+  <div class="faq">
+    <h2><span class="dim">Before you</span> download</h2>
+    <div>
+      <details open><summary>Is it free?</summary><p>Yes. Murmint itself is free, with no subscription and no word limits. It uses an AI provider you choose (such as Groq, Cloudflare Workers AI or OpenAI) with your own API key, and you pay that provider directly for what you use, usually fractions of a cent per dictation. Groq and Cloudflare have free tiers, and a model on your own PC through Ollama or LM Studio costs nothing at all.</p></details>
+      <details><summary>Do you steal my data?</summary><p>No. An account is optional, and your dictation never goes through our servers. Your voice goes straight from your PC to the speech provider you picked, and your text to the formatting provider you picked. Audio is never stored. API keys are encrypted with Windows and only sent to their own provider. History is optional and stays on your PC. The whole app is open source, so anyone can check.</p></details>
+      <details><summary>Why do I get a security warning when I install it?</summary><p>Windows shows a "Windows protected your PC" (SmartScreen) warning for every app that isn't code-signed, and Murmint isn't code-signed yet because the certificate is expensive. It doesn't mean the file is dangerous. Click <b>More info</b>, then <b>Run anyway</b>. If you would rather not trust a download, you can read the source and build the installer yourself.</p></details>
+      <details><summary>How do I install it?</summary><p>Download the installer and run it. If Windows warns you, click More info, then Run anyway. Choose where to install and click Install; it takes a few seconds and needs no administrator rights. Then open <b>Models</b>, add an API key (or connect Ollama or LM Studio), click in any text box, hold <span class="kbd">Ctrl</span> + <span class="kbd">Win</span>, talk, and let go.</p></details>
+      <details><summary>Will it be available for Linux or Mac?</summary><p>Not yet. It's Windows only during the alpha. Linux and Mac are on the list for later.</p></details>
+      <details><summary>Which AI provider should I use?</summary><p>For the cheapest start, Groq or Cloudflare Workers AI. For the best formatting, add Claude or a GPT model for text alongside a speech model. Claude can't transcribe audio, so pair it with OpenAI, Groq or Cloudflare for the speech part. A ChatGPT subscription doesn't include API access.</p></details>
+      <details><summary>Does it work in every app?</summary><p>It types wherever your cursor is, using paste, and puts your clipboard back right after. If no text box is selected it looks for the app's message box, and otherwise offers Copy. Apps running as administrator and some games ignore pasted text.</p></details>
+      <details><summary>Will it slow down my PC?</summary><p>No. One small engine written in Rust does the work, and Murmint sits quietly in your tray until you hold the shortcut. See <a href="/performance">Performance</a> for how much memory it uses.</p></details>
+      <details><summary>How do I uninstall it?</summary><p>Use Installed apps in Windows Settings, or the uninstaller in the Murmint folder. It asks whether to delete your settings, history and saved keys too.</p></details>
+      <details><summary>How do I report a problem or contact you?</summary><p>Email <a href="mailto:proimpacts@auralink.dev">proimpacts@auralink.dev</a>, or ask in the <a href="https://discord.gg/MEfdzfyARV">Discord</a> if you're a tester.</p></details>
+      <details><summary>Who made it?</summary><p>One developer, with Claude as an AI pair programmer. Read the <a href="/mission">mission</a> and meet the <a href="/contributors">contributors</a>.</p></details>
+    </div>
+  </div>
+</section>
+
+<section class="wrap">
+  <div class="final">
+    <h2>Still <span class="dim">curious?</span></h2>
+    <p>See exactly what leaves your PC and what does not.</p>
+    <div class="actions"><a class="btn ghost" href="/privacy">Read about privacy</a></div>
+  </div>
+</section>

@@ -1,0 +1,62 @@
+<section class="page-top wrap">
+  <h1><span class="dim">Small, quick,</span> and out of your way.</h1>
+  <p>Murmint does its work in one small native program, so it stays light while it waits in your tray.</p>
+</section>
+
+<section class="block wrap" style="padding-top:60px">
+  <div class="speed" style="margin-top:0">
+    <div class="panel">
+      <h3>Memory while running, compared</h3>
+      <div class="bars">
+        <div class="bar-row us"><span>Murmint</span><div class="track"><div class="fill" style="width:3.4%"></div></div><span class="val">~100 MB</span></div>
+        <div class="bar-row"><span>Wispr Flow</span><div class="track"><div class="fill" style="width:27%"></div></div><span class="val">~800 MB</span></div>
+        <div class="bar-row"><span>OpenSuperWhisper</span><div class="track"><div class="fill" style="width:33%"></div></div><span class="val">~1 GB</span></div>
+        <div class="bar-row"><span>Dragon</span><div class="track"><div class="fill" style="width:40%"></div></div><span class="val">~1.2 GB</span></div>
+        <div class="bar-row"><span>Superwhisper (large model)</span><div class="track"><div class="fill" style="width:100%"></div></div><span class="val">~3 GB</span></div>
+      </div>
+    </div>
+    <div class="panel">
+      <h3>The engine</h3>
+      <div class="figs">
+        <div><b>3 MB</b><span>memory the engine uses while you dictate</span></div>
+        <div><b>4.5 MB</b><span>engine size on disk</span></div>
+        <div><b>3</b><span>processes in total while Murmint waits in your tray</span></div>
+        <div><b>0.3 s</b><span>to start up and be ready to listen</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<section class="block wrap">
+  <div class="prose">
+    <h2>Why it's light</h2>
+    <ul>
+      <li><b>One Rust engine does the work.</b> Dictation, text rules, the model router, your vocabulary, settings, history, keys, shortcuts and typing all run in one native program instead of a web page.</li>
+      <li><b>The interface is only the interface.</b> The windows just show what the engine tells them, and the settings window can be closed while Murmint keeps running in the tray.</li>
+      <li><b>Nothing extra starts.</b> Background features of the browser engine that Murmint never uses (translation, media casting, update checks, sync, accessibility trees, caches) are switched off, and there's no separate graphics process: drawing happens inside the main one.</li>
+      <li><b>Idle memory goes back to Windows.</b> While Murmint sits in your tray, and after every dictation, it tells Windows to take back the memory it isn't using. It's only the unused pages, and they return in microseconds if they are needed, so nothing gets slower.</li>
+      <li><b>A closed window is gone.</b> The window is built when you open it and removed completely when you close it, so a Murmint in the tray holds no window at all.</li>
+    </ul>
+    <h2>Why it feels quick</h2>
+    <ul>
+      <li><b>The microphone starts first.</b> Finding which app you're typing into happens after recording has already begun.</li>
+      <li><b>The connections are warm.</b> While you talk, the connections to your speech provider and to your formatting model are already open, so nothing waits for a handshake when you let go.</li>
+      <li><b>The text goes in first.</b> Murmint pastes the moment the text is ready and puts your clipboard back in the background afterwards, so a dictation is finished about a third of a second sooner and the next one can start straight away.</li>
+      <li><b>Live models stream.</b> With a live speech model, your words are transcribed while you speak instead of after.</li>
+      <li><b>One request to format.</b> The whole dictation is cleaned up in a single request, sent to the best model you've set up, with a fallback if it fails.</li>
+    </ul>
+    <h2>Check it yourself</h2>
+    <p>Hover over Murmint's tray icon and it shows its own total. Or open Task Manager, go to Details, and add up the memory of the Murmint processes. How fast text appears depends mostly on the speech and formatting providers you choose.</p>
+    <h2>How these numbers were measured</h2>
+    <p>Murmint's figure is from Windows 11, using the same measure as Task Manager's Memory column (private working set), added up over every Murmint process about 30 seconds after starting, with the app sitting in the tray as it normally does. Open the Murmint window and it rises to about 66 MB. The other dictation apps' figures are what reviewers and users report, not our own measurements, so they vary with the PC and the model you use, and some come from competing products' write-ups.</p>
+  </div>
+</section>
+
+<section class="wrap">
+  <div class="final">
+    <h2>Try it <span class="dim">on your PC</span></h2>
+    <p>Murmint waits quietly in your system tray until you hold the shortcut.</p>
+    <div class="actions"><a class="btn primary" href="/download" data-download>Download for Windows</a></div>
+  </div>
+</section>

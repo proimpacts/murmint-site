@@ -1,0 +1,66 @@
+<section class="page-top wrap">
+  <h1><span class="dim">Built out of</span> frustration.</h1>
+  <p>Why Murmint exists, who made it, and everything that happened along the way.</p>
+</section>
+
+<section class="block wrap" style="padding-top:60px">
+  <div class="prose post">
+    <header class="post-head">
+      <img class="post-avatar" src="assets/proimpacts-discord.png" alt="" width="64" height="64">
+      <div class="post-who">
+        <b class="post-name">proimpacts</b>
+        <span class="post-meta"><span class="post-tag">Murmint Team</span>The person behind Murmint</span>
+      </div>
+    </header>
+
+    <h2>Our mission</h2>
+    <p>Voice typing should be fast, light and fair. Murmint turns what you say into clean, formatted text in any Windows app, using the AI services you already have, without a subscription and without eating your computer.</p>
+
+    <h2>Where it started</h2>
+    <p>It started with frustration. I talk faster than I type, so I tried the popular dictation apps, and every one of them left me angry. They charged high monthly prices for a small number of words, buried the one thing I wanted under features I never asked for, and used a ridiculous amount of my computer's resources just to sit in the background.</p>
+    <p>At the same time I was building my other project, <a href="https://auralink.dev/">AuraLink</a>, with Claude helping me through front-end and UI problems. I kept hitting my usage limits, and every time I did, I was stuck typing long explanations by hand again.</p>
+
+    <h2>The epiphany</h2>
+    <p>Somewhere in the middle of that, it clicked. Everything these apps were charging me for was already within reach. The speech models and the language models were right there, on services I could use with my own keys, for fractions of a cent. What was missing was not more features. It was a small, fast tool that got out of the way: hold a key, talk, and get clean text where my cursor already was.</p>
+    <p>So I decided to stop paying for bloat and build it myself, the way I wanted it to work.</p>
+
+    <h2>Building it</h2>
+    <p>Murmint took five to six months of work. I did about 60% of the work and Claude about 40%: I drove the idea, the design and the decisions, and Claude worked alongside me on the code, including the big migration that moved the heart of the app into Rust.</p>
+    <p>That move is why Murmint stays so small and quick. One native engine, about 4.5 MB, does the work: the text rules, the model router, your keys, the shortcuts and the typing. The window you see is only the interface, a thin Electron shell that opens when you want it and is gone when you close it.</p>
+
+    <h2>When I lost it</h2>
+    <p>It was not a straight road. After all that time building, the GitHub account I had been working on was accidentally deleted, and most of the code went with it.</p>
+    <p>What I had left was the idea, the design, every decision I had made along the way, and the parts of the project I still had. I uploaded those to a new account and started putting the rest back together. The project survived, and so did the point of it: I still wanted this tool to exist, and I still couldn't find it anywhere.</p>
+    <p>It also explains something you might notice. The history of the new GitHub repository starts at that re-upload, not at the beginning. That isn't because Murmint is new. It's because the original account, with all of its history, is gone.</p>
+
+    <h2>Starting again</h2>
+    <p>Since then I have been rebuilding and improving it quickly. A lot has changed:</p>
+    <ul>
+      <li><b>Much lighter.</b> About 20 MB of memory while it waits in your tray, and the memory it isn't using goes back to Windows.</li>
+      <li><b>Smarter model choice.</b> Automatic picks the best model for your speech, not the cheapest one.</li>
+      <li><b>Easier setup.</b> Bring your own keys, or use a model on your own PC.</li>
+      <li><b>A style for each app.</b> Professional in Slack, casual in Discord, exact in your code editor.</li>
+      <li><b>A proper installer</b> that shows Murmint working in the apps you actually have installed.</li>
+      <li><b>A community.</b> A Discord server for the people testing it, where bugs and ideas go straight to me.</li>
+    </ul>
+
+    <h2>Where it's now</h2>
+    <p>Murmint is in closed alpha. A small group of testers are using it and I'm fixing what they find. When it's ready it will open up to everyone, with a signed installer so Windows stops warning about it.</p>
+    <p>And honestly, it has also been a fun project. It's the tool I wanted to exist, built because nobody else had built it quite right.</p>
+
+    <h2>What that means for you</h2>
+    <ul>
+      <li><b>No subscription.</b> The app is free; you pay your AI provider directly, or nothing with a local model.</li>
+      <li><b>Light.</b> One small Rust engine does the work.</li>
+      <li><b>Yours.</b> Your keys, history and vocabulary stay on your PC, and the code is open under the GPL.</li>
+    </ul>
+  </div>
+</section>
+
+<section class="wrap">
+  <div class="final">
+    <h2>Try it <span class="dim">yourself</span></h2>
+    <p>Murmint waits quietly in your system tray until you hold the shortcut.</p>
+    <div class="actions"><a class="btn primary" href="/download" data-download>Download for Windows</a><a class="btn ghost" href="/contributors">Meet the contributors</a></div>
+  </div>
+</section>
