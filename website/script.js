@@ -193,20 +193,3 @@ var DOWNLOAD_URL = location.protocol === 'file:' ? '' : '/download/installer'; /
   try { if (code) el.textContent = new Intl.DisplayNames(['en'], { type: 'region' }).of(code); } catch (e) { /* keep the plain wording */ }
 })();
 
-// Counts down to the public release, then hides itself
-(function () {
-  var els = document.querySelectorAll('.countdown[data-release]');
-  if (!els.length) return;
-  var at = Date.parse(els[0].dataset.release);
-  function tick() {
-    var left = at - Date.now();
-    els.forEach(function (el) {
-      if (left <= 0) { el.hidden = true; return; }
-      var d = Math.floor(left / 864e5), h = Math.floor(left / 36e5) % 24, m = Math.floor(left / 6e4) % 60, s = Math.floor(left / 1e3) % 60;
-      el.hidden = false;
-      el.innerHTML = 'Open alpha release December 1st <b>' + d + 'd ' + h + 'h ' + m + 'm ' + s + 's</b>';
-    });
-    if (left > 0) setTimeout(tick, 1000);
-  }
-  tick();
-})();
