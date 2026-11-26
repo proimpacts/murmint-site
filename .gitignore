@@ -1,0 +1,10 @@
+# secrets: keep them in site/discord.env or your host's environment variables
+site/discord.env
+*.env
+
+# build output
+site/target/
+*.log
+
+# runtime data (Discord user IDs and saved settings)
+/data/
