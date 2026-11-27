@@ -193,3 +193,40 @@ var DOWNLOAD_URL = location.protocol === 'file:' ? '' : '/download/installer'; /
   try { if (code) el.textContent = new Intl.DisplayNames(['en'], { type: 'region' }).of(code); } catch (e) { /* keep the plain wording */ }
 })();
 
+
+// Contributors: everyone with commits in the repo, live from GitHub, shown by name only. The cards written into the page show until this
+// answers, and stay if GitHub can't be reached; known people keep their own words, anyone new gets a card here.
+(function () {
+  var list = document.getElementById('people');
+  if (!list || !window.fetch) return;
+  var repo = list.getAttribute('data-repo');
+  var claude = list.querySelector('[data-login="claude"]'); // written out; new people go in before it
+  var ghButton = list.querySelector('.links a[href^="https://github.com/"]');
+  fetch('https://api.github.com/repos/' + repo + '/contributors?per_page=100', { headers: { Accept: 'application/vnd.github+json' } })
+    .then(function (r) { return r.ok ? r.json() : Promise.reject(); })
+    .then(function (people) {
+      people.filter(function (p) { return p.type === 'User'; }).forEach(function (p) {
+        if (!list.querySelector('[data-login="' + p.login.toLowerCase() + '"]')) {
+          var card = document.createElement('article');
+          card.className = 'person';
+          card.setAttribute('data-login', p.login.toLowerCase());
+          var img = document.createElement('img');
+          img.className = 'avatar'; img.alt = ''; img.width = 80; img.height = 80; img.loading = 'lazy';
+          img.src = p.avatar_url + (p.avatar_url.indexOf('?') < 0 ? '?' : '&') + 's=160';
+          var info = document.createElement('div');
+          var name = document.createElement('h2'); name.textContent = p.login;
+          var role = document.createElement('p'); role.className = 'role'; role.textContent = 'Contributor';
+          var links = document.createElement('div'); links.className = 'links';
+          if (ghButton) {
+            var a = ghButton.cloneNode(true);
+            a.href = 'https://github.com/' + encodeURIComponent(p.login);
+            links.appendChild(a);
+          }
+          info.append(name, role, links);
+          card.append(img, info);
+          list.insertBefore(card, claude);
+        }
+      });
+    })
+    .catch(function () { });
+})();
