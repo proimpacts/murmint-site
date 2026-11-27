@@ -1,0 +1,261 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Am I a typer? | Typers Anonymous</title>
+<meta name="description" content="Is Typers Anonymous for you? Twelve quick yes-or-no questions about how you type.">
+<meta name="robots" content="noindex">
+<link rel="icon" href="/assets/favicon.png">
+<style>
+  @font-face { font-family: Inter; font-weight: 100 900; font-display: swap; src: url('/assets/inter-latin.woff2') format('woff2'); }
+  /* the same calm greens as the Typers Anonymous page */
+  :root { --sage: #dfe7d4; --moss: #2f4a2c; --moss-2: #3d5c39; --ink: #1d2a1b; --ink-2: #4a5946; --ink-3: #75836f;
+    --line: rgba(29, 42, 27, .12); --frost: rgba(246, 249, 241, .66); --leaf: #5e8a4e; --pale: #cfe3bd; }
+  * { box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body { margin: 0; color: var(--ink); font: 18px/1.65 Inter, 'Segoe UI', system-ui, sans-serif; -webkit-font-smoothing: antialiased; overflow-x: hidden; background: var(--sage); }
+  a { color: inherit; }
+  button { font: inherit; color: inherit; }
+  :focus-visible { outline: 3px solid var(--leaf); outline-offset: 3px; }
+  .wrap { width: min(1120px, calc(100% - 40px)); margin: 0 auto; }
+  h1, h2 { margin: 0; letter-spacing: -.04em; line-height: 1.04; font-weight: 750; }
+  .btn { display: inline-flex; align-items: center; gap: 10px; padding: 15px 26px; border-radius: 999px; border: 0; cursor: pointer; font-weight: 650; font-size: 17px; text-decoration: none; transition: transform .2s ease, background .2s ease; }
+  .btn:hover { transform: translateY(-1px); }
+  .btn.primary { background: var(--moss); color: #f3f6ee; box-shadow: 0 16px 30px -18px rgba(29, 42, 27, .7); }
+  .btn.primary:hover { background: var(--moss-2); }
+  .btn.ghost { background: var(--frost); box-shadow: inset 0 0 0 1px var(--line); }
+  .kbd { display: inline-grid; place-items: center; min-width: 1.9em; padding: .05em .5em; border-radius: .4em; background: rgba(255, 255, 255, .75); font-weight: 700; font-size: .82em;
+    box-shadow: inset 0 -2px 0 rgba(0, 0, 0, .07), 0 0 0 1px rgba(29, 42, 27, .16); }
+  .card { background: var(--frost); border-radius: 26px; box-shadow: 0 0 0 1px var(--line), 0 24px 50px -40px rgba(29, 42, 27, .5); backdrop-filter: blur(8px); }
+
+  /* nav */
+  .top { position: sticky; top: 0; z-index: 10; backdrop-filter: blur(16px); background: rgba(226, 234, 216, .78); border-bottom: 1px solid var(--line); }
+  .top .wrap { display: flex; align-items: center; gap: 28px; height: 64px; }
+  .brand { display: flex; align-items: center; gap: 10px; font-weight: 800; letter-spacing: -.03em; text-decoration: none; font-size: 19px; white-space: nowrap; }
+  .brand img { width: 30px; height: 30px; border-radius: 8px; }
+  .brand span { font-weight: 600; color: var(--ink-3); }
+  .top nav { margin-left: auto; display: flex; align-items: center; gap: 22px; font-size: 15px; font-weight: 550; }
+  .top nav a { text-decoration: none; color: var(--ink-2); } .top nav a:hover { color: var(--ink); }
+  .top nav .cta { padding: 8px 16px; border-radius: 999px; background: var(--moss); color: #f3f6ee; white-space: nowrap; }
+  .top nav .cta:hover { color: #fff; background: var(--moss-2); }
+  @media (max-width: 760px) { .top nav a:not(.cta) { display: none; } }
+  @media (max-width: 480px) { .top .wrap { gap: 12px; } .top nav .cta span { display: none; } }
+
+  /* intro over snowy peaks */
+  .intro { position: relative; padding: 110px 0 150px; color: #f2f5ec; background: url('/assets/anon/peaks.jpg') center 55% / cover no-repeat; }
+  .intro::before { content: ''; position: absolute; inset: 0; background: linear-gradient(180deg, rgba(14, 28, 36, .45), rgba(14, 28, 36, .6)); }
+  .intro .wrap { position: relative; max-width: 820px; }
+  .intro h1 { font-size: clamp(44px, 6.4vw, 80px); }
+  .intro p { margin: 22px 0 0; font-size: clamp(18px, 2vw, 21px); color: rgba(242, 245, 236, .9); max-width: 640px; }
+
+  /* the questions */
+  .sheet, .result { background: #eef3e8; }
+  .sheet { position: relative; width: min(820px, calc(100% - 40px)); margin: -90px auto 0; padding: 18px 40px 36px; }
+  .qs { list-style: none; margin: 0; padding: 0; counter-reset: q; }
+  .qs li { counter-increment: q; display: grid; grid-template-columns: 36px 1fr auto; gap: 14px; align-items: center; padding: 18px 0; border-bottom: 1px solid var(--line); border-radius: 4px; transition: background .3s ease; }
+  .qs li::before { content: counter(q) '.'; font-weight: 700; color: var(--ink-3); font-variant-numeric: tabular-nums; }
+  .qs li.missing { background: rgba(94, 138, 78, .12); box-shadow: -14px 0 0 rgba(94, 138, 78, .12), 14px 0 0 rgba(94, 138, 78, .12); }
+  .yn { display: flex; gap: 6px; }
+  .yn label { position: relative; cursor: pointer; }
+  .yn input { position: absolute; opacity: 0; width: 1px; height: 1px; }
+  .yn span { display: block; width: 60px; padding: 8px 0; border-radius: 999px; text-align: center; font-size: 14px; font-weight: 700; background: rgba(255, 255, 255, .6); color: var(--ink-2); box-shadow: 0 0 0 1px var(--line); }
+  .yn input:checked + span { background: var(--moss); color: #f3f6ee; box-shadow: none; }
+  .yn input[value="no"]:checked + span { background: var(--ink-3); }
+  .yn input:focus-visible + span { outline: 3px solid var(--leaf); outline-offset: 3px; }
+  .send { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 16px; margin-top: 28px; }
+  .send p { margin: 0; color: var(--ink-2); font-size: 16px; }
+  @media (max-width: 600px) { .sheet { padding: 10px 22px 28px; } .qs li { grid-template-columns: 28px 1fr; } .yn { grid-column: 2; } }
+
+  /* the result */
+  .result { width: min(820px, calc(100% - 40px)); margin: -90px auto 0; padding: 44px 48px 48px; position: relative; }
+  .result h2 { font-size: clamp(34px, 4.6vw, 52px); }
+  .score { display: flex; flex-wrap: wrap; align-items: center; gap: 18px 26px; margin: 30px 0 10px; }
+  .score .n { font-size: 96px; font-weight: 800; letter-spacing: -.05em; line-height: .9; color: var(--moss); }
+  .score .n small { display: block; font-size: 16px; font-weight: 600; letter-spacing: 0; color: var(--ink-3); margin-top: 8px; }
+  .level { padding: 10px 20px; border-radius: 999px; font-size: 18px; font-weight: 750; letter-spacing: -.01em; }
+  .level.low { background: var(--pale); color: var(--moss); }
+  .level.medium { background: #7f9d74; color: #f4f7ef; }
+  .level.high { background: var(--moss); color: #f4f7ef; }
+  .result .says { margin: 12px 0 0; font-size: 19px; color: var(--ink-2); max-width: 620px; }
+  .notes { list-style: none; margin: 20px 0 0; padding: 0; display: grid; gap: 10px; max-width: 640px; }
+  .notes li { position: relative; padding: 14px 18px 14px 44px; border-radius: 16px; background: #f7f9f3; box-shadow: 0 0 0 1px var(--line); color: var(--ink); font-size: 17px; }
+  .notes li::before { content: ''; position: absolute; left: 18px; top: 22px; width: 10px; height: 10px; border-radius: 3px; background: var(--leaf); }
+  .notes[hidden] { display: none; }
+  .advice { margin-top: 34px; padding: 28px 30px 30px; border-radius: 22px; background: rgba(47, 74, 44, .08); }
+  .advice b { display: block; font-size: 24px; letter-spacing: -.03em; color: var(--moss); margin-bottom: 8px; }
+  .advice p { margin: 0 0 24px; color: var(--ink-2); }
+  .advice .actions { display: flex; flex-wrap: wrap; gap: 12px; }
+  @media (max-width: 600px) { .result { padding: 32px 24px 34px; } .advice { padding: 22px 20px 24px; } }
+
+  footer { margin-top: 120px; padding: 30px 0 44px; color: var(--ink-3); font-size: 14px; background: #cdd9bf; }
+  footer .wrap { display: grid; gap: 14px; }
+  footer .row { display: flex; flex-wrap: wrap; gap: 18px; align-items: center; }
+  footer a { color: var(--ink-2); text-decoration: none; }
+  footer .sp { margin-left: auto; }
+  footer .note { max-width: 760px; margin: 0; color: var(--ink-2); }
+  footer .ta-links { display: flex; flex-wrap: wrap; gap: 6px 22px; padding-bottom: 14px; border-bottom: 1px solid var(--line); font-weight: 600; }
+  footer .parody { margin: 6px 0 0; padding-top: 16px; border-top: 1px solid var(--line); font-size: 13px; color: var(--ink-3); }
+  footer .help ul { display: flex; flex-wrap: wrap; gap: 6px 22px; margin: 10px 0 0; padding: 0; list-style: none; }
+  footer .help a { color: var(--moss); font-weight: 650; }
+
+  @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } .btn, .qs li { transition: none; } }
+</style>
+</head>
+<body>
+<header class="top">
+  <div class="wrap">
+    <a class="brand" href="/anonymous"><img src="/assets/logo.svg" alt="">Typers <span>Anonymous</span></a>
+    <nav><a href="/anonymous#first">New here?</a><a href="/anonymous#shares">Shares</a><a href="/anonymous#today">Just for Today</a><a class="cta" href="/download">Download<span> Murmint</span></a></nav>
+  </div>
+</header>
+
+<main>
+  <section class="intro">
+    <div class="wrap">
+      <h1>Is Typers Anonymous for you?</h1>
+      <p>Twelve quick questions about how you type. Answer yes or no to each one, then press Submit to see where you land.</p>
+    </div>
+  </section>
+
+  <form class="card sheet" id="quiz" novalidate>
+    <ol class="qs" id="qs"></ol>
+    <div class="send">
+      <p id="left" aria-live="polite">Take your time. Nobody's watching you type.</p>
+      <button class="btn primary" type="submit">Submit</button>
+    </div>
+  </form>
+
+  <section class="card result" id="result" hidden aria-live="polite" tabindex="-1">
+    <h2>Is Typers Anonymous for you?</h2>
+    <div class="score">
+      <div class="n"><span id="count"></span><small>of 12 answered yes</small></div>
+      <span class="level" id="level"></span>
+    </div>
+    <p class="says" id="says"></p>
+    <ul class="notes" id="notes" hidden></ul>
+    <div class="advice">
+      <b>Whatever your score, use Murmint.</b>
+      <p>Typing starts as a habit. Left alone, it can turn into a disease: one quick reply becomes ten, ten become a way of life, and one day your wrists file a complaint. Hold <span class="kbd">Ctrl</span> + <span class="kbd">Win</span> and say it instead.</p>
+      <div class="actions">
+        <a class="btn primary" href="/download">Download Murmint</a>
+        <a class="btn ghost" href="/anonymous#shares">Read members' shares</a>
+        <button class="btn ghost" type="button" id="again">Take it again</button>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer><div class="wrap">
+  <div class="row">
+    <a class="brand" href="/"><img src="/assets/logo.svg" alt="">Murmint</a>
+    <span class="sp"></span><a href="/privacy-policy">Privacy policy</a><a href="/terms">Terms</a><a href="https://github.com/proimpacts/murmint">GitHub</a>
+  </div>
+  <nav class="ta-links" aria-label="Typers Anonymous"><a href="/am-i-a-typer">Am I a typer?</a><a href="/first-meeting">Your first meeting</a><a href="/the-basic-shortcut">The Basic Shortcut</a><a href="/developers-share">A share from the developer</a></nav>
+  <div class="help">
+    <p class="note">If you know someone who's struggling, please call a suicide or crisis hotline. Contact one of these numbers, or your local emergency services, to get them help. Resources are available.</p>
+    <ul>
+      <li>US and Canada: call or text <a href="tel:988">988</a></li>
+      <li>UK and Ireland: Samaritans, <a href="tel:116123">116 123</a></li>
+      <li>Australia: Lifeline, <a href="tel:131114">13 11 14</a></li>
+      <li>Emergencies: 911, 999 or 112</li>
+      <li>Other countries: <a href="https://findahelpline.com">findahelpline.com</a></li>
+    </ul>
+  </div>
+  <p class="parody">This is a parody website and is not real.</p>
+</div></footer>
+
+<script>
+  const QUESTIONS = [
+    'On a normal workday, do you type more words than you say out loud?',
+    'Do you think faster than you can type?',
+    'Have you ever typed out a message that would have taken ten seconds to say?',
+    'Do you rewrite a sentence a few times before you hit send?',
+    'Is there an email waiting for you right now that you\'d rather not write?',
+    'Have you ever sent a voice note just to get out of typing a long reply?',
+    'Do you have saved replies or text shortcuts for things you type all the time?',
+    'Do you write prompts for an AI tool most days?',
+    'Have you ever switched a chat to a call because typing was taking too long?',
+    'Do you know your typing speed off by heart?',
+    'Do your hands feel tired after a long day at the keyboard?',
+    'Have you ever wished you could just say an email and have it written?',
+  ];
+  const LEVELS = [
+    { max: 3, name: 'Low', cls: 'low' },
+    { max: 7, name: 'Medium', cls: 'medium' },
+    { max: 12, name: 'High', cls: 'high' },
+  ];
+  // one line for every possible score, from 0 to 12
+  const SAYS = [
+    'Not a single yes. Your keyboard barely knows you. You\'re still welcome to stay for the tea.',
+    'Just the one yes. Hardly a typer at all, but we\'ll keep a seat for you anyway.',
+    'Two yeses. A casual typer. You probably close your laptop at a sensible hour.',
+    'Three yeses. Nothing to worry about, but your keyboard has started to recognise you.',
+    'Four yeses. You type a fair bit, and some of it could easily be said instead.',
+    'Five yeses. Typing is a real part of your day now. Talking could take some of it off your hands.',
+    'Six yeses. Right down the middle. You\'d win back a good chunk of your day by saying it instead.',
+    'Seven yeses. You\'re well past casual. There\'s a chair for you at the Thursday group.',
+    'Eight yeses. You type for a living, whatever your job title says.',
+    'Nine yeses. Your keyboard has seen more of you this week than your friends have.',
+    'Ten yeses. You\'re among friends. Hold Ctrl + Win and give your hands the afternoon off.',
+    'Eleven yeses. One short of a full house. Please put the keyboard down slowly.',
+    'Twelve out of twelve. A full house. You\'re exactly who we built this for.',
+  ];
+  // a few answers get a line of their own, so different combinations read differently
+  const NOTES = [
+    { q: 1, text: 'You think faster than you type. Talking is much closer to the speed you think at.' },
+    { q: 4, text: 'That email you\'d rather not write? Say it out loud first. It\'s easier to tidy something than to start it.' },
+    { q: 5, text: 'You already send voice notes to get out of typing. Murmint is the same idea, except it arrives as text.' },
+    { q: 7, text: 'You write AI prompts most days. Spoken prompts come out numbered and clear, with the "don\'t" parts kept separate.' },
+    { q: 10, text: 'Tired hands at the end of the day are a good reason to let your voice do some of the work.' },
+  ];
+
+  const form = document.getElementById('quiz'), qs = document.getElementById('qs'), left = document.getElementById('left'), result = document.getElementById('result');
+  QUESTIONS.forEach((q, i) => {
+    const li = document.createElement('li'), text = document.createElement('span'), yn = document.createElement('div');
+    text.id = 'q' + i; text.textContent = q;
+    yn.className = 'yn'; yn.setAttribute('role', 'radiogroup'); yn.setAttribute('aria-labelledby', text.id);
+    ['yes', 'no'].forEach((value) => {
+      const label = document.createElement('label'), input = document.createElement('input'), span = document.createElement('span');
+      input.type = 'radio'; input.name = 'q' + i; input.value = value;
+      input.addEventListener('change', () => li.classList.remove('missing'));
+      span.textContent = value === 'yes' ? 'Yes' : 'No';
+      label.append(input, span); yn.append(label);
+    });
+    li.append(text, yn); qs.append(li);
+  });
+
+  form.addEventListener('submit', (e) => {
+    e.preventDefault();
+    const picked = QUESTIONS.map((_, i) => form.elements['q' + i].value);
+    const missing = picked.map((v, i) => (v ? -1 : i)).filter((i) => i >= 0);
+    if (missing.length) {
+      missing.forEach((i) => qs.children[i].classList.add('missing'));
+      left.textContent = missing.length === 1 ? 'One question still needs an answer.' : missing.length + ' questions still need an answer.';
+      qs.children[missing[0]].scrollIntoView({ block: 'center' });
+      qs.children[missing[0]].querySelector('input').focus({ preventScroll: true });
+      return;
+    }
+    const count = picked.filter((v) => v === 'yes').length, level = LEVELS.find((l) => count <= l.max);
+    document.getElementById('count').textContent = count;
+    const badge = document.getElementById('level');
+    badge.textContent = level.name; badge.className = 'level ' + level.cls;
+    document.getElementById('says').textContent = SAYS[count];
+    const notes = NOTES.filter((n) => picked[n.q] === 'yes').slice(0, 2);
+    const list = document.getElementById('notes');
+    list.replaceChildren(...notes.map((n) => { const li = document.createElement('li'); li.textContent = n.text; return li; }));
+    list.hidden = !notes.length;
+    form.hidden = true; result.hidden = false;
+    result.scrollIntoView({ block: 'start' }); window.scrollBy(0, -90);
+    result.focus({ preventScroll: true });
+  });
+
+  document.getElementById('again').addEventListener('click', () => {
+    form.reset(); [...qs.children].forEach((li) => li.classList.remove('missing'));
+    left.textContent = 'Take your time. Nobody\'s watching you type.';
+    result.hidden = true; form.hidden = false;
+    window.scrollTo(0, 0);
+  });
+</script>
+</body>
+</html>

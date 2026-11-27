@@ -1,0 +1,131 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>The Basic Shortcut | Typers Anonymous</title>
+<meta name="description" content="The Basic Shortcut: the main text of Typers Anonymous. Twelve chapters on typing less and saying more.">
+<meta name="robots" content="noindex">
+<link rel="icon" href="/assets/favicon.png">
+<link rel="stylesheet" href="/assets/anon/pages.css">
+<style>
+  /* the book on its own, then the contents, then chapter one */
+  .book-top { display: grid; grid-template-columns: 300px 1fr; gap: 56px; align-items: center; }
+  .tome { position: relative; aspect-ratio: 3 / 4.3; padding: 30px 26px 24px 36px; display: flex; flex-direction: column; justify-content: space-between; border-radius: 5px 14px 14px 5px; color: #f4f7ef; background: #2f5a3c; font-family: var(--book);
+    box-shadow: inset 10px 0 0 rgba(0, 0, 0, .16), inset 11px 0 0 rgba(255, 255, 255, .08), 10px 10px 0 -2px #e9e6da, 10px 10px 0 -1px rgba(0, 0, 0, .1), 0 40px 60px -30px rgba(20, 35, 15, .7); transform: rotate(-2deg); }
+  .tome b { font-size: 36px; line-height: 1.12; letter-spacing: -.01em; }
+  .tome small { font: 600 12px Inter; letter-spacing: .05em; opacity: .75; }
+  .book-top h2 { font-size: clamp(32px, 4vw, 46px); }
+  .book-top p { color: var(--ink-2); margin: 16px 0 0; }
+  .book-top .facts { display: flex; flex-wrap: wrap; gap: 8px; margin: 22px 0 28px; }
+  .book-top .facts span { padding: 6px 14px; border-radius: 999px; background: rgba(47, 74, 44, .09); font-size: 14px; font-weight: 600; color: var(--moss); }
+  @media (max-width: 760px) { .book-top { grid-template-columns: 1fr; } .tome { width: 240px; } }
+
+  .contents { margin-top: 64px; }
+  .contents h2, .chapter > h2 { font-size: clamp(28px, 3.4vw, 38px); margin-bottom: 18px; }
+  .contents ol { list-style: none; margin: 0; padding: 0; counter-reset: ch; }
+  .contents li { counter-increment: ch; display: flex; align-items: baseline; gap: 14px; padding: 13px 0; border-bottom: 1px solid var(--line); }
+  .contents li::before { content: counter(ch); width: 26px; flex: none; font-weight: 700; color: var(--ink-3); font-variant-numeric: tabular-nums; }
+  .contents li span { flex: 1; font-family: var(--book); font-size: 20px; }
+  .contents li em { font-style: normal; font-size: 15px; color: var(--ink-3); font-variant-numeric: tabular-nums; }
+  .contents li a { text-decoration: none; } .contents li a:hover { text-decoration: underline; }
+
+  .chapter { margin-top: 64px; }
+  .chapter .num { font-weight: 650; font-size: 15px; color: var(--leaf); margin-bottom: 8px; }
+  .chapter .page { font-family: var(--book); font-size: 20px; line-height: 1.8; color: #2b3027; }
+  .chapter .page p { margin: 0 0 20px; color: inherit; }
+  .chapter .page p:first-child::first-letter { float: left; font-size: 74px; line-height: .85; padding: 6px 10px 0 0; color: var(--moss); font-weight: 700; }
+
+  .said { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; margin-top: 56px; }
+  .said figure { margin: 0; padding: 22px 22px 20px; border-radius: 20px; background: rgba(47, 74, 44, .08); }
+  .said blockquote { margin: 0; font-size: 16px; color: var(--ink); }
+  .said figcaption { margin-top: 12px; font: 24px/1 var(--hand); color: var(--moss); }
+  @media (max-width: 760px) { .said { grid-template-columns: 1fr; } }
+</style>
+</head>
+<body>
+<header class="top">
+  <div class="wrap">
+    <a class="brand" href="/anonymous"><img src="/assets/logo.svg" alt="">Typers <span>Anonymous</span></a>
+    <nav><a href="/first-meeting">Your first meeting</a><a href="/developers-share">A share from the developer</a><a href="/am-i-a-typer">Am I a typer?</a><a class="cta" href="/download">Download<span> Murmint</span></a></nav>
+  </div>
+</header>
+
+<main>
+  <section class="intro" style="--photo: url('/assets/anon/still-lake.jpg')">
+    <div class="wrap">
+      <a class="crumb" href="/anonymous">Typers Anonymous</a>
+      <h1>The Basic Shortcut</h1>
+      <p>The main text of Typers Anonymous. Twelve chapters on typing less and saying more, written by members and read aloud at meetings.</p>
+    </div>
+  </section>
+
+  <div class="card sheet">
+    <div class="book-top">
+      <div class="tome" aria-hidden="true"><span class="kc"><span>Ctrl</span></span><b>The Basic Shortcut</b><small>TYPERS ANONYMOUS</small></div>
+      <div>
+        <h2>Our main text</h2>
+        <p>Most members are handed a copy at their first meeting. Some read it cover to cover. Most open it at random, read a page, and feel a little better about the email they've been avoiding.</p>
+        <div class="facts"><span>Fourth edition</span><span>12 chapters</span><span>Free to read</span><span>Mostly dictated</span></div>
+        <div class="actions"><a class="btn primary" href="#chapter-one">Read chapter one</a><a class="btn ghost" href="/am-i-a-typer">Take the twelve questions</a></div>
+      </div>
+    </div>
+
+    <section class="contents">
+      <h2>Contents</h2>
+      <ol>
+        <li><span><a href="#chapter-one">Ten Tired Fingers</a></span><em>1</em></li>
+        <li><span>The Email That Took All Morning</span><em>9</em></li>
+        <li><span>Thinking Out Loud</span><em>19</em></li>
+        <li><span>Ums, Restarts and "No Wait"</span><em>27</em></li>
+        <li><span>Hold, Talk, Let Go</span><em>35</em></li>
+        <li><span>Your First Thirty Days</span><em>46</em></li>
+        <li><span>Prompts, Plainly Spoken</span><em>55</em></li>
+        <li><span>When the Office Is Quiet</span><em>63</em></li>
+        <li><span>For Families and Desk Neighbours</span><em>71</em></li>
+        <li><span>For Managers and IT</span><em>79</em></li>
+        <li><span>Keycaps and Milestones</span><em>86</em></li>
+        <li><span>Keep Coming Back</span><em>94</em></li>
+      </ol>
+    </section>
+
+    <section class="chapter" id="chapter-one">
+      <div class="num">Chapter one</div>
+      <h2>Ten Tired Fingers</h2>
+      <div class="page">
+        <p>Most of us didn't notice how much we typed. It crept up on us. A few emails in the morning, a few messages after lunch, a document that needed "just a couple of lines". Then one day we looked down at our hands at six in the evening and realised they had been busy since nine, and we couldn't remember most of what they'd written.</p>
+        <p>We were not short of words. That was never the problem. We could explain a plan to a colleague across the desk in thirty seconds. Ask us to write the same plan down, and it took twenty minutes, three drafts and a short walk. The words were all there. They were just stuck behind ten tired fingers.</p>
+        <p>Some of us tried to type faster. We learned shortcuts. We bought keyboards that sounded like rain on a tin roof. We got quicker, and we typed more, and we were exactly as tired as before.</p>
+        <p>What finally helped was simple, almost embarrassingly so. We stopped asking our fingers to carry everything. We held two keys, said what we meant the way we'd say it to a friend, and let go. The words came out tidy, finished, and in the right place.</p>
+        <p>Nobody here is against keyboards. We still use ours. We just don't make them do all the talking any more.</p>
+      </div>
+    </section>
+
+    <section class="said" aria-label="What members say about the book">
+      <figure><blockquote>"I listened to the whole thing on a walk. Then I said a review out loud. This is that review."</blockquote><figcaption>June</figcaption></figure>
+      <figure><blockquote>"Chapter seven changed how I talk to my AI. It changed how my AI talks back, too."</blockquote><figcaption>Kai</figcaption></figure>
+      <figure><blockquote>"I keep it by my keyboard. Mostly so I'll stop using the keyboard."</blockquote><figcaption>Dana</figcaption></figure>
+    </section>
+  </div>
+</main>
+
+<footer><div class="wrap">
+  <div class="row">
+    <a class="brand" href="/"><img src="/assets/logo.svg" alt="">Murmint</a>
+    <span class="sp"></span><a href="/privacy-policy">Privacy policy</a><a href="/terms">Terms</a><a href="https://github.com/proimpacts/murmint">GitHub</a>
+  </div>
+  <nav class="ta-links" aria-label="Typers Anonymous"><a href="/am-i-a-typer">Am I a typer?</a><a href="/first-meeting">Your first meeting</a><a href="/the-basic-shortcut">The Basic Shortcut</a><a href="/developers-share">A share from the developer</a></nav>
+  <div class="help">
+    <p class="note">If you know someone who's struggling, please call a suicide or crisis hotline. Contact one of these numbers, or your local emergency services, to get them help. Resources are available.</p>
+    <ul>
+      <li>US and Canada: call or text <a href="tel:988">988</a></li>
+      <li>UK and Ireland: Samaritans, <a href="tel:116123">116 123</a></li>
+      <li>Australia: Lifeline, <a href="tel:131114">13 11 14</a></li>
+      <li>Emergencies: 911, 999 or 112</li>
+      <li>Other countries: <a href="https://findahelpline.com">findahelpline.com</a></li>
+    </ul>
+  </div>
+  <p class="parody">This is a parody website and is not real.</p>
+</div></footer>
+</body>
+</html>

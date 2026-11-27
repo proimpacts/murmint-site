@@ -1,0 +1,565 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Typers Anonymous | Murmint</title>
+<meta name="description" content="Have a problem with typing? There is a solution. Hold two keys, say it, and Murmint types it out clean in any app on your PC.">
+<meta name="robots" content="noindex">
+<link rel="icon" href="/assets/favicon.png">
+<style>
+  @font-face { font-family: Inter; font-weight: 100 900; font-display: swap; src: url('/assets/inter-latin.woff2') format('woff2'); }
+  @font-face { font-family: Newsreader; font-weight: 300 700; font-style: normal; font-display: swap; src: url('/assets/newsreader.woff2') format('woff2'); }
+  @font-face { font-family: Newsreader; font-weight: 300 700; font-style: italic; font-display: swap; src: url('/assets/newsreader-italic.woff2') format('woff2'); }
+  @font-face { font-family: Marker; font-display: swap; src: url('/assets/permanent-marker.woff2') format('woff2'); }
+
+  /* sage and moss, a deep lake green for the dark sections, and three typefaces with one job each:
+     Newsreader for anything you read, Inter for anything you click, the marker for anything handwritten */
+  :root {
+    --sage: #dfe7d4; --paper: #edf2e6; --ink: #1b2619; --ink-2: #48573f; --ink-3: #6f7d69;
+    --moss: #2f4a2c; --moss-2: #3d5c39; --leaf: #5e8a4e; --pale: #cfe3bd; --night: #13261b;
+    --rule: rgba(27, 38, 25, .16);
+    --serif: Newsreader, 'Iowan Old Style', Georgia, serif; --sans: Inter, 'Segoe UI', system-ui, sans-serif; --hand: Marker, 'Segoe Print', cursive;
+  }
+  * { box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body { margin: 0; color: var(--ink); background: var(--sage); font: 17px/1.6 var(--sans); -webkit-font-smoothing: antialiased; overflow-x: hidden; }
+  a { color: inherit; }
+  button { font: inherit; color: inherit; }
+  img { display: block; max-width: 100%; }
+  :focus-visible { outline: 3px solid var(--leaf); outline-offset: 3px; }
+  .wrap { width: min(1160px, calc(100% - 48px)); margin: 0 auto; }
+  h1, h2, h3 { margin: 0; font-family: var(--serif); font-weight: 450; letter-spacing: -.02em; line-height: 1.04; }
+  h2 { font-size: clamp(38px, 5vw, 64px); }
+  .read { font: 20px/1.62 var(--serif); color: var(--ink-2); }
+  .read p { margin: 0 0 18px; }
+  .note { font-size: 15px; color: var(--ink-3); }
+  .btn { display: inline-flex; align-items: center; padding: 14px 24px; border-radius: 999px; border: 0; cursor: pointer; font: 600 16px/1 var(--sans); text-decoration: none; transition: background .2s ease, transform .2s ease; }
+  .btn:hover { transform: translateY(-1px); }
+  .btn.solid { background: var(--moss); color: #f2f5ec; }
+  .btn.solid:hover { background: var(--moss-2); }
+  .btn.line { box-shadow: inset 0 0 0 1.5px currentColor; }
+  .link { font-weight: 600; text-decoration-thickness: 1.5px; text-underline-offset: 4px; }
+  .kbd { display: inline-grid; place-items: center; min-width: 1.9em; padding: .05em .45em; border-radius: .35em; font: 650 .78em/1.5 var(--sans); background: rgba(255, 255, 255, .7); color: var(--ink);
+    box-shadow: inset 0 -2px 0 rgba(0, 0, 0, .08), 0 0 0 1px rgba(27, 38, 25, .18); }
+
+  /* masthead */
+  .top { position: sticky; top: 0; z-index: 20; background: rgba(223, 231, 212, .9); backdrop-filter: blur(14px); border-bottom: 1px solid var(--rule); }
+  .top .wrap { display: flex; align-items: center; gap: 30px; height: 66px; }
+  .mark { display: flex; align-items: center; gap: 12px; text-decoration: none; font: 500 22px/1 var(--serif); letter-spacing: -.01em; white-space: nowrap; }
+  .top nav { margin-left: auto; display: flex; align-items: center; gap: 26px; font-size: 15px; font-weight: 550; }
+  .top nav a { text-decoration: none; color: var(--ink-2); }
+  .top nav a:hover { color: var(--ink); }
+  .top nav .btn { padding: 10px 18px; font-size: 15px; color: #f2f5ec; }
+  .top nav .btn { white-space: nowrap; }
+  @media (max-width: 900px) { .top nav a:not(.btn) { display: none; } }
+  @media (max-width: 480px) { .top .wrap { gap: 14px; } .mark { font-size: 19px; } .top nav .btn span { display: none; } }
+
+  /* a keycap: the fellowship's mark, the badge logo and the milestones all use it */
+  .kc { --k: #f2f0e7; --t: #2a3326; position: relative; display: inline-grid; place-items: center; flex: none; width: 34px; height: 34px; border-radius: 8px; background: var(--k);
+    box-shadow: inset 0 -4px 0 rgba(0, 0, 0, .15), inset 0 0 0 1px rgba(0, 0, 0, .12), 0 1px 0 rgba(0, 0, 0, .2); }
+  .kc::before { content: ''; position: absolute; left: 4px; right: 4px; top: 3px; bottom: 7px; border-radius: 6px; background: linear-gradient(160deg, rgba(255, 255, 255, .7), rgba(255, 255, 255, 0) 62%), var(--k); }
+  .kc span { position: relative; top: -2px; font: 750 10px/1 var(--sans); letter-spacing: .01em; color: var(--t); }
+
+  /* hero: the alpine valley, a green shade behind the words, and Sam's badge hanging from above */
+  .hero { position: relative; overflow: hidden; color: #f3f6ee; background: url('/assets/anon/alpine.jpg') center 55% / cover no-repeat; }
+  .hero::before { content: ''; position: absolute; inset: 0;
+    background: linear-gradient(90deg, rgba(16, 34, 20, .74) 0%, rgba(16, 34, 20, .46) 45%, rgba(16, 34, 20, 0) 74%), linear-gradient(180deg, rgba(16, 34, 20, 0) 55%, rgba(16, 34, 20, .62)); }
+  .hero .wrap { position: relative; z-index: 1; }
+  .hero .grid { display: grid; grid-template-columns: 1.4fr .6fr; gap: 40px; align-items: center; padding: 84px 0 70px; }
+  .issue { font-size: 14px; color: rgba(243, 246, 238, .78); margin: 0 0 26px; }
+  .hero h1 { font-size: clamp(50px, 7.4vw, 104px); font-weight: 400; line-height: .98; }
+  .hero h1 span { display: block; color: var(--pale); }
+  .hero .lead { max-width: 560px; margin: 28px 0 34px; font: 21px/1.55 var(--serif); color: rgba(243, 246, 238, .92); }
+  .hero .acts { display: flex; flex-wrap: wrap; align-items: center; gap: 26px; }
+  .hero .link { color: #fff; }
+  .facts { display: grid; grid-template-columns: repeat(3, 1fr); border-top: 1px solid rgba(243, 246, 238, .3); }
+  .facts div { padding: 20px 24px 30px 0; }
+  .facts div + div { padding-left: 24px; border-left: 1px solid rgba(243, 246, 238, .3); }
+  .facts b { display: block; font: 500 19px/1.3 var(--serif); }
+  .facts span { font-size: 14px; color: rgba(243, 246, 238, .78); }
+  .facts .kbd { background: rgba(255, 255, 255, .18); color: #fff; box-shadow: 0 0 0 1px rgba(255, 255, 255, .35); }
+  @media (max-width: 900px) { .hero .grid { grid-template-columns: 1fr; padding-top: 56px; } .hero::before { background: rgba(16, 34, 20, .6); } .badge-col { display: none; } .facts { grid-template-columns: 1fr; } .facts div + div { padding-left: 0; border-left: 0; border-top: 1px solid rgba(243, 246, 238, .3); } }
+
+  /* the name tag: a plain "HELLO my name is" sticker, written on in marker and pressed on at a slight angle */
+  .sticker { position: relative; width: 300px; margin: 0 auto; border-radius: 14px; background: #2f5a3c; padding: 0 8px 20px; transform: rotate(-3deg);
+    box-shadow: 0 1px 1px rgba(10, 24, 14, .3), 0 22px 34px -16px rgba(8, 20, 10, .65); }
+  .sticker::after { content: ''; position: absolute; inset: 0; border-radius: inherit; pointer-events: none;
+    background: linear-gradient(115deg, rgba(255, 255, 255, .14) 0 18%, rgba(255, 255, 255, 0) 36%); }
+  .sticker .hello { padding: 14px 0 10px; text-align: center; color: #fff; }
+  .sticker .hello b { display: block; font: 900 46px/1 var(--sans); letter-spacing: .03em; }
+  .sticker .hello small { font: 600 16px/1.3 var(--sans); }
+  .sticker .name { border-radius: 6px; padding: 26px 10px 24px; text-align: center; background: #fbfbf7; color: #1c1d22; font: 66px/1 var(--hand); }
+  .sticker .name span { display: inline-block; transform: rotate(-2deg); text-shadow: 0 0 1px rgba(28, 29, 34, .45); }
+  .badge-col figcaption { margin: 34px auto 0; max-width: 330px; font: italic 18px/1.4 var(--serif); text-align: center; color: rgba(243, 246, 238, .92); text-shadow: 0 1px 12px rgba(10, 24, 14, .6); }
+
+  section.block { padding: 120px 0; }
+
+  /* what happens at a meeting */
+  .meet { display: grid; grid-template-columns: .9fr 1.1fr; gap: 72px; align-items: start; }
+  .meet .intro { position: sticky; top: 110px; }
+  .meet .intro .read { margin-top: 22px; }
+  .steps { list-style: none; margin: 0; padding: 0; counter-reset: s; }
+  .steps li { counter-increment: s; display: grid; grid-template-columns: 180px 1fr; gap: 28px; padding: 28px 0; border-top: 1px solid var(--rule); }
+  .steps li:last-child { border-bottom: 1px solid var(--rule); }
+  .steps img { width: 180px; height: 132px; object-fit: cover; border-radius: 6px; }
+  .steps h3 { font-size: 34px; display: flex; align-items: baseline; gap: 14px; margin: 2px 0 10px; }
+  .steps h3::before { content: counter(s); font: italic 400 22px/1 var(--serif); color: var(--leaf); }
+  .steps p { margin: 0; font: 18px/1.6 var(--serif); color: var(--ink-2); }
+  .terms { display: grid; grid-template-columns: repeat(4, 1fr); gap: 0; margin: 72px 0 0; }
+  .terms div { padding: 0 24px 0 0; }
+  .terms div + div { padding-left: 24px; border-left: 1px solid var(--rule); }
+  .terms dt { font: 500 21px/1.2 var(--serif); margin-bottom: 8px; }
+  .terms dd { margin: 0; font-size: 15px; color: var(--ink-2); }
+  .meet-more { margin-top: 40px; }
+  @media (max-width: 900px) { .meet { grid-template-columns: 1fr; gap: 36px; } .meet .intro { position: static; } .steps li { grid-template-columns: 1fr; } .steps img { width: 100%; height: 200px; }
+    .terms { grid-template-columns: 1fr 1fr; gap: 28px 0; } .terms div:nth-child(3) { padding-left: 0; border-left: 0; } }
+
+  /* the twelve questions, on the deep lake green */
+  .dark { background: var(--night); color: #eef2e8; }
+  .quiz { display: grid; grid-template-columns: 1fr 1fr; gap: 72px; align-items: center; }
+  .quiz .read { color: rgba(238, 242, 232, .82); margin: 22px 0 32px; }
+  .quiz .btn.solid { background: var(--pale); color: var(--night); }
+  .quiz .btn.solid:hover { background: #e0eed2; }
+  .quiz ol { list-style: none; margin: 0; padding: 0; counter-reset: q; }
+  .quiz li { counter-increment: q; display: grid; grid-template-columns: 34px 1fr auto; gap: 14px; align-items: baseline; padding: 20px 0; border-top: 1px solid rgba(238, 242, 232, .16); font: 19px/1.45 var(--serif); }
+  .quiz li:last-child { border-bottom: 1px solid rgba(238, 242, 232, .16); opacity: .55; }
+  .quiz li::before { content: counter(q) '.'; font: 600 14px var(--sans); color: rgba(238, 242, 232, .5); }
+  .quiz li span { font: 600 13px var(--sans); color: rgba(238, 242, 232, .55); white-space: nowrap; }
+  @media (max-width: 900px) { .quiz { grid-template-columns: 1fr; gap: 40px; } }
+
+  /* shares: read like a newsletter, one featured and five in two columns */
+  .shares-head { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: end; gap: 16px 40px; margin-bottom: 56px; }
+  .shares-head p { margin: 0; max-width: 380px; }
+  .hello { font-size: 13px; color: var(--ink-3); }
+  .who b { display: block; font: 40px/1.05 var(--hand); color: var(--ink); margin-top: 4px; }
+  .who small { display: block; font-size: 14px; color: var(--ink-3); margin-top: 6px; }
+  .featured { display: grid; grid-template-columns: .7fr 1.3fr; gap: 64px; padding: 44px 0 56px; border-top: 2px solid var(--ink); }
+  .featured h3 { font-size: clamp(34px, 3.8vw, 48px); margin-top: 26px; }
+  .featured .read { font-size: 21px; }
+  .featured .read p:first-child::first-letter { float: left; font-size: 78px; line-height: .82; padding: 8px 10px 0 0; color: var(--moss); }
+  .others { display: grid; grid-template-columns: 1fr 1fr; gap: 0 64px; }
+  .share { padding: 36px 0 30px; border-top: 1px solid var(--rule); }
+  .share header { display: flex; flex-wrap: wrap; align-items: end; justify-content: space-between; gap: 8px 20px; margin-bottom: 18px; }
+  .share h3 { font-size: 29px; margin-bottom: 14px; }
+  .share .read { font-size: 18px; }
+  .share .read p { margin-bottom: 14px; }
+  @media (max-width: 900px) { .featured, .others { grid-template-columns: 1fr; gap: 0; } .featured .read { margin-top: 20px; } }
+
+  /* the glacier: slogans set like a poem, not a ticker */
+  .glacier { position: relative; padding: 150px 0; color: #f2f5ec; background: url('/assets/anon/glacier.jpg') center 45% / cover no-repeat; }
+  .glacier::before { content: ''; position: absolute; inset: 0; background: linear-gradient(180deg, rgba(14, 30, 40, .42), rgba(14, 30, 40, .62)); }
+  .glacier .wrap { position: relative; }
+  .glacier .breathe { margin: 0 0 40px; font-size: 15px; color: rgba(242, 245, 236, .8); }
+  .slogans { margin: 0; padding: 0; list-style: none; font: italic 400 clamp(34px, 5.2vw, 72px)/1.12 var(--serif); letter-spacing: -.02em; }
+  .slogans li:nth-child(2) { padding-left: 12%; } .slogans li:nth-child(3) { padding-left: 24%; } .slogans li:nth-child(4) { padding-left: 36%; color: var(--pale); }
+  @media (max-width: 700px) { .slogans li { padding-left: 0 !important; } }
+
+  /* keycaps on a keyboard plate */
+  .keys-head { display: grid; grid-template-columns: 1fr 1fr; gap: 72px; align-items: end; margin-bottom: 48px; }
+  .keys-head .read { margin: 0; }
+  .plate { padding: 26px; border-radius: 22px; background: linear-gradient(180deg, #2b3a2c, #1d281e); box-shadow: inset 0 1px 0 rgba(255, 255, 255, .08), 0 30px 60px -36px rgba(15, 30, 15, .8); }
+  .row { display: grid; grid-template-columns: repeat(7, 1fr); gap: 14px; }
+  .key { --c: #f1efe6; --t: #2a3326; position: relative; width: 100%; aspect-ratio: 1; padding: 0; border: 0; cursor: pointer; border-radius: 14px; background: var(--c);
+    box-shadow: inset 0 -10px 0 rgba(0, 0, 0, .16), inset 0 0 0 1px rgba(0, 0, 0, .1), 0 4px 0 rgba(0, 0, 0, .35); transition: transform .1s ease, box-shadow .1s ease; }
+  .key::before { content: ''; position: absolute; left: 10%; right: 10%; top: 7%; bottom: 20%; border-radius: 10px; background: linear-gradient(160deg, rgba(255, 255, 255, .5), rgba(255, 255, 255, 0) 60%), var(--c); }
+  .key span { position: absolute; left: 20%; top: 14%; font: 700 clamp(15px, 1.7vw, 21px)/1 var(--sans); color: var(--t); }
+  .key small { position: absolute; left: 20%; bottom: 27%; font: 600 11px/1 var(--sans); color: var(--t); opacity: .7; }
+  .key:hover, .key:active, .key.down { transform: translateY(4px); box-shadow: inset 0 -6px 0 rgba(0, 0, 0, .16), inset 0 0 0 1px rgba(0, 0, 0, .1), 0 0 0 rgba(0, 0, 0, .35); }
+  .legend { display: grid; grid-template-columns: repeat(7, 1fr); gap: 14px; margin-top: 22px; padding: 0 26px; }
+  .legend b { display: block; font: 500 18px/1.25 var(--serif); }
+  .legend p { margin: 4px 0 0; font-size: 14px; line-height: 1.45; color: var(--ink-2); }
+  @media (max-width: 900px) { .keys-head { grid-template-columns: 1fr; gap: 20px; } .plate { overflow-x: auto; } .row { grid-template-columns: repeat(7, 84px); } .legend { grid-template-columns: 1fr 1fr; padding: 0; gap: 18px 24px; } }
+
+  /* our story */
+  .story-photo { margin: 0 0 56px; }
+  .story-photo img { width: 100%; height: clamp(280px, 40vw, 520px); object-fit: cover; border-radius: 8px; }
+  .story-photo figcaption { margin-top: 10px; }
+  .story { display: grid; grid-template-columns: .7fr 1.3fr; gap: 64px; }
+  .story .sig { margin: 30px 0 0; font: 30px/1.1 var(--hand); color: var(--moss); transform: rotate(-2deg); transform-origin: left; }
+  .story .read p:first-child { color: var(--ink); font-weight: 500; }
+  .timeline { display: grid; grid-template-columns: repeat(4, 1fr); margin-top: 56px; border-top: 1px solid var(--rule); }
+  .timeline div { padding: 22px 24px 0 0; }
+  .timeline div + div { padding-left: 24px; border-left: 1px solid var(--rule); }
+  .timeline b { display: block; font: italic 500 22px/1.2 var(--serif); color: var(--moss); margin-bottom: 6px; }
+  .timeline span { font-size: 15px; color: var(--ink-2); }
+  @media (max-width: 900px) { .story { grid-template-columns: 1fr; gap: 24px; } .timeline { grid-template-columns: 1fr 1fr; gap: 24px 0; } .timeline div:nth-child(3) { padding-left: 0; border-left: 0; } }
+
+  /* just for today: a page from the book, on a still lake */
+  .today { position: relative; padding: 130px 0; background: url('/assets/anon/still-lake.jpg') center 40% / cover no-repeat; }
+  .today::before { content: ''; position: absolute; inset: 0; background: linear-gradient(180deg, rgba(30, 50, 40, .25), rgba(30, 50, 40, .45)); }
+  .page { position: relative; width: min(660px, calc(100% - 40px)); margin: 0 auto; padding: 48px 54px 52px; border-radius: 4px; background: #f8f6ee; color: #26291f; box-shadow: 0 1px 0 rgba(0, 0, 0, .05), 0 40px 80px -40px rgba(10, 25, 15, .7); }
+  .page .series { display: flex; justify-content: space-between; gap: 16px; font-size: 14px; font-weight: 600; color: #6d725f; }
+  .page h2 { font-size: clamp(34px, 4.6vw, 48px); margin: 24px 0; }
+  .page blockquote { margin: 0 0 6px; font: italic 22px/1.5 var(--serif); }
+  .page cite { display: block; font-style: normal; font-size: 14px; color: #6d725f; margin-bottom: 24px; }
+  .page .read { color: #2f3329; }
+  .page .jft { margin: 26px 0 0; padding-top: 20px; border-top: 1px solid rgba(38, 41, 31, .15); font: 19px/1.6 var(--serif); }
+  .page .jft b { font-family: var(--sans); font-size: 16px; }
+  @media (max-width: 600px) { .page { padding: 34px 26px 36px; } }
+
+  /* family and workplaces */
+  .two { display: grid; grid-template-columns: 1fr 1fr; gap: 0 64px; }
+  .two > div { padding-top: 30px; border-top: 2px solid var(--ink); }
+  .two h3 { font-size: 36px; margin-bottom: 16px; }
+  .two .read { margin-bottom: 26px; }
+  @media (max-width: 900px) { .two { grid-template-columns: 1fr; gap: 48px; } }
+
+  /* a newcomer asks */
+  .faq { display: grid; grid-template-columns: .7fr 1.3fr; gap: 64px; }
+  details { border-top: 1px solid var(--rule); }
+  details:last-child { border-bottom: 1px solid var(--rule); }
+  summary { cursor: pointer; list-style: none; display: flex; justify-content: space-between; gap: 20px; padding: 20px 0; font: 500 22px/1.3 var(--serif); }
+  summary::-webkit-details-marker { display: none; }
+  summary::after { content: '+'; font: 400 26px/1 var(--sans); color: var(--leaf); }
+  details[open] summary::after { content: '\2013'; }
+  details p { margin: -6px 0 22px; max-width: 620px; font: 18px/1.6 var(--serif); color: var(--ink-2); }
+  @media (max-width: 900px) { .faq { grid-template-columns: 1fr; gap: 28px; } }
+
+  /* the close: a lupine field under a soft sky */
+  .close { position: relative; padding: 170px 0; text-align: center; color: #f4f7ef; background: url('/assets/anon/lupine.jpg') center 70% / cover no-repeat; }
+  .close::before { content: ''; position: absolute; inset: 0; background: linear-gradient(180deg, rgba(22, 32, 20, .45), rgba(22, 32, 20, .62)); }
+  .close .wrap { position: relative; }
+  .close h2 { font-size: clamp(56px, 8.6vw, 120px); font-weight: 400; }
+  .close p { margin: 22px auto 36px; max-width: 560px; font: 21px/1.5 var(--serif); color: rgba(244, 247, 239, .9); }
+  .close .kbd { background: rgba(255, 255, 255, .18); color: #fff; box-shadow: 0 0 0 1px rgba(255, 255, 255, .35); }
+  .close .acts { display: flex; justify-content: center; flex-wrap: wrap; gap: 14px; }
+  .close .btn.solid { background: #f2f5ec; color: var(--moss); }
+  .close .btn.line { color: #fff; }
+
+  footer { padding: 40px 0 46px; background: #cdd9bf; color: var(--ink-3); font-size: 14px; }
+  footer .wrap { display: grid; gap: 18px; }
+  footer .row1 { display: flex; flex-wrap: wrap; align-items: center; gap: 18px 24px; }
+  footer .row1 .brand { display: flex; align-items: center; gap: 10px; font: 700 18px/1 var(--sans); letter-spacing: -.02em; text-decoration: none; color: var(--ink); }
+  footer .row1 .brand img { width: 28px; height: 28px; border-radius: 7px; }
+  footer .row1 .sp { margin-left: auto; }
+  footer a { color: var(--ink-2); text-decoration: none; }
+  footer .ta { display: flex; flex-wrap: wrap; gap: 6px 24px; padding: 16px 0; border-block: 1px solid var(--rule); font-weight: 600; }
+  footer .help p { margin: 0; max-width: 760px; color: var(--ink-2); }
+  footer .help ul { display: flex; flex-wrap: wrap; gap: 8px 24px; margin: 12px 0 0; padding: 0; list-style: none; }
+  footer .help svg { display: inline-block; vertical-align: -2px; margin-right: 7px; color: var(--leaf); }
+  footer .help a { color: var(--moss); font-weight: 650; }
+  footer .parody { margin: 0; padding-top: 16px; border-top: 1px solid var(--rule); font-size: 13px; }
+
+  @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } .key, .btn { transition: none; } }
+</style>
+</head>
+<body>
+<header class="top">
+  <div class="wrap">
+    <a class="mark" href="/anonymous"><span class="kc"><span>TA</span></span>Typers Anonymous</a>
+    <nav><a href="#first">New here?</a><a href="/am-i-a-typer">Am I a typer?</a><a href="#shares">Shares</a><a href="#today">Just for Today</a><a class="btn solid" href="/download">Download<span>&nbsp;Murmint</span></a></nav>
+  </div>
+</header>
+
+<main>
+  <section class="hero">
+    <div class="wrap">
+      <div class="grid">
+        <div>
+          <p class="issue">The Thursday Bulletin, <span id="issue-date">this week</span></p>
+          <h1>Have a problem with typing? <span>There is a solution.</span></h1>
+          <p class="lead">Typers Anonymous is a fellowship of people who typed all day and found another way. Hold two keys, say it the way it comes out, and Murmint types it clean in any app on your PC.</p>
+          <div class="acts"><a class="btn solid" href="/am-i-a-typer">Take the twelve questions</a><a class="link" href="#first">What happens at a meeting</a></div>
+        </div>
+        <figure class="badge-col" style="margin:0">
+          <div class="sticker" aria-hidden="true">
+            <div class="hello"><b>HELLO</b><small>my name is</small></div>
+            <div class="name"><span>Sam</span></div>
+          </div>
+          <figcaption>"Hi, I'm Sam, and I type 9,000 words a day."</figcaption>
+        </figure>
+      </div>
+      <div class="facts">
+        <div><b>Meetings</b><span>Whenever you hold <span class="kbd">Ctrl</span> + <span class="kbd">Win</span>, in any app.</span></div>
+        <div><b>Dues</b><span>None. There's no subscription.</span></div>
+        <div><b>Members</b><span>Anyone who types more than they'd like to.</span></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="block" id="first">
+    <div class="wrap">
+      <div class="meet">
+        <div class="intro">
+          <h2>Three steps, not twelve.</h2>
+          <div class="read"><p>Meetings happen wherever your cursor is. You don't need to sign up for anything or say a word until you're ready. Take the steps at your own pace.</p></div>
+          <a class="link" href="/first-meeting">Read the full guide to your first meeting</a>
+        </div>
+        <ol class="steps">
+          <li><img src="/assets/anon/lake.jpg" alt="A still mountain lake" loading="lazy"><div><h3>Hold.</h3><p>We admitted that typing all day had become a lot. Then we gently held <span class="kbd">Ctrl</span> + <span class="kbd">Win</span>.</p></div></li>
+          <li><img src="/assets/anon/flowers.jpg" alt="A field of wildflowers" loading="lazy"><div><h3>Talk.</h3><p>We said it the way it came out. Ums, restarts and "no wait" included. Nobody here judges a first draft.</p></div></li>
+          <li><img src="/assets/anon/seeds.jpg" alt="Dandelion seeds lifting off" loading="lazy"><div><h3>Let go.</h3><p>Murmint typed it where our cursor was: punctuated, in paragraphs, with the corrections already made.</p></div></li>
+        </ol>
+      </div>
+      <dl class="terms">
+        <div><dt>No dues or fees</dt><dd>Speech on your PC is free with Murmint 1. Formatting uses your own AI provider, often under $1 a month.</dd></div>
+        <div><dt>Anonymous</dt><dd>Your audio is never stored. What's said at the meeting stays at the meeting.</dd></div>
+        <div><dt>Every Windows app</dt><dd>Email, chat, docs, code and your browser, on Windows 10 and 11.</dd></div>
+        <div><dt>One requirement</dt><dd>A desire to stop typing. A microphone helps.</dd></div>
+      </dl>
+    </div>
+  </section>
+
+  <section class="block dark" id="test">
+    <div class="wrap quiz">
+      <div>
+        <h2>Is Typers Anonymous for you?</h2>
+        <div class="read"><p>Twelve quick questions about how you type. Answer yes or no, and see where you land. It takes about a minute.</p></div>
+        <a class="btn solid" href="/am-i-a-typer">Start the questions</a>
+      </div>
+      <ol aria-label="The first three questions">
+        <li>On a normal workday, do you type more words than you say out loud?<span>Yes or no</span></li>
+        <li>Do you think faster than you can type?<span>Yes or no</span></li>
+        <li>Have you ever typed out a message that would have taken ten seconds to say?<span>Yes or no</span></li>
+      </ol>
+    </div>
+  </section>
+
+  <section class="block" id="shares">
+    <div class="wrap">
+      <div class="shares-head">
+        <h2>From this week's meetings</h2>
+        <p class="note">Members' shares, in their own words. Names changed to protect the formerly typing.</p>
+      </div>
+
+      <article class="featured">
+        <div class="who"><span class="hello">Hello, my name is</span><b>Dana</b><small>Writes 60 emails a day</small><h3>Forty minutes, one email</h3></div>
+        <div class="read">
+          <p>I've been coming for about three months. Before that I sent sixty emails a day, and every single one started with "Hope this finds you well." I never once wondered how it found them. I was just typing.</p>
+          <p>The worst day was a Tuesday. I wrote a reply to Maria, deleted it, wrote it again word for word, then sat there wondering if "Thanks!" was too much. Forty minutes. One email.</p>
+          <p>Now I say it the way I'd say it to her face, and I go and make a coffee. I've had the same mug for three months. I'd never noticed it before.</p>
+        </div>
+      </article>
+
+      <div class="others">
+        <article class="share">
+          <header><div class="who"><span class="hello">Hello, my name is</span><b>Leo</b></div><small class="note">Changes his mind a lot</small></header>
+          <h3>Four messages to move one meeting</h3>
+          <div class="read">
+            <p>I change my mind a lot. Ask anyone. Ask my team. They've muted me.</p>
+            <p>I used to type "let's meet at 8:30", send it, then "actually 9:30", then "sorry, does 9:30 work?", then "ignore that, 9 is fine". Four messages to move one meeting. People kept replying to the wrong one.</p>
+            <p>The first time I said it out loud, I said "eight thirty, no wait, nine thirty", and only nine thirty showed up. One message. Nobody had to scroll.</p>
+          </div>
+        </article>
+        <article class="share">
+          <header><div class="who"><span class="hello">Hello, my name is</span><b>Ravi</b></div><small class="note">Backend engineer</small></header>
+          <h3>One-word pull requests</h3>
+          <div class="read">
+            <p>For years my pull request descriptions were one word long. Usually "fix". On a good day, "fixes".</p>
+            <p>It wasn't that I didn't know what I'd changed. I knew exactly. I just couldn't face typing it all out after typing the code itself.</p>
+            <p>Now I say it on the way to get coffee: what changed, why, and what to test. My reviewers have started leaving comments like "thanks for the context". I didn't know people said that.</p>
+          </div>
+        </article>
+        <article class="share">
+          <header><div class="who"><span class="hello">Hello, my name is</span><b>June</b></div><small class="note">Novelist</small></header>
+          <h3>Lists with one finger</h3>
+          <div class="read">
+            <p>I'm a novelist, so you'd think words would be my friends. They were, until I had to type all of them.</p>
+            <p>I'm also a list person. I used to stand in the hallway with my laptop on one arm, typing "passport" with one finger.</p>
+            <p>These days I just ramble: "um, passport, the charger, snacks, oh, and a jacket." I once said eleven ums in one sentence, and none of them made it onto the list. I felt seen.</p>
+          </div>
+        </article>
+        <article class="share">
+          <header><div class="who"><span class="hello">Hello, my name is</span><b>Kai</b></div><small class="note">Vibecoder</small></header>
+          <h3>Don't change the colours</h3>
+          <div class="read">
+            <p>I spend all day typing to an AI that types code for me. I know how that sounds.</p>
+            <p>My prompts used to be one long sentence with no full stops, and every time, it changed my colours. I'd type DON'T CHANGE THE COLOURS in capitals, and it still changed the colours.</p>
+            <p>Now I talk to it like a colleague, and the prompt comes out numbered, with the "don't" part on its own at the bottom. The colours haven't changed in six weeks.</p>
+          </div>
+        </article>
+        <article class="share">
+          <header><div class="who"><span class="hello">Hello, we are</span><b>Support team</b></div><small class="note">Eight of us, one inbox</small></header>
+          <h3>The meeting about typing less</h3>
+          <div class="read">
+            <p>Between us we answer a few hundred tickets a day, and most replies say the same three things, typed slightly differently every time.</p>
+            <p>We had a meeting about typing less. Somebody took the notes. Out loud. They were the shortest notes we've ever had, and the only ones anyone read.</p>
+            <p>The tricky tickets, the ones that need a real answer, get spoken now. They sound more like us, too.</p>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section class="glacier" aria-label="Slogans">
+    <div class="wrap">
+      <p class="breathe">Breathe in for four. Out for four.</p>
+      <ul class="slogans">
+        <li>One sentence at a time.</li>
+        <li>Easy does it.</li>
+        <li>Progress, not perfection.</li>
+        <li>Keep coming back.</li>
+      </ul>
+    </div>
+  </section>
+
+  <section class="block" id="keycaps">
+    <div class="wrap">
+      <div class="keys-head">
+        <h2>Keycaps</h2>
+        <div class="read"><p>We mark our milestones with keycaps. Press one. It's the only key you'll need to press today.</p></div>
+      </div>
+      <div class="plate"><div class="row">
+        <button class="key" type="button" aria-label="Welcome keycap"><span>Esc</span><small>welcome</small></button>
+        <button class="key" type="button" style="--c:#d5e2ea" aria-label="24 hours keycap"><span>24</span><small>hours</small></button>
+        <button class="key" type="button" style="--c:#d3dfc5" aria-label="30 days keycap"><span>30</span><small>days</small></button>
+        <button class="key" type="button" style="--c:#e6dec8" aria-label="90 days keycap"><span>90</span><small>days</small></button>
+        <button class="key" type="button" style="--c:#7f9d74;--t:#f4f7ef" aria-label="6 months keycap"><span>6</span><small>months</small></button>
+        <button class="key" type="button" style="--c:#4a6e48;--t:#f4f7ef" aria-label="1 year keycap"><span>1</span><small>year</small></button>
+        <button class="key" type="button" style="--c:#0f1a11;--t:#e3ecd7" aria-label="Multiple years keycap"><span>&infin;</span><small>years</small></button>
+      </div></div>
+      <div class="legend">
+        <div><b>Welcome</b><p>For anyone at their first meeting.</p></div>
+        <div><b>24 hours</b><p>One whole day of saying it instead.</p></div>
+        <div><b>30 days</b><p>You've stopped apologising to your keyboard.</p></div>
+        <div><b>90 days</b><p>Your wrists sent a thank-you note. Out loud.</p></div>
+        <div><b>6 months</b><p>People ask how you write so much.</p></div>
+        <div><b>1 year</b><p>You forgot where the semicolon key is.</p></div>
+        <div><b>Years</b><p>You lead the Monday Inbox Group now.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="block" id="story" style="padding-top:0">
+    <div class="wrap">
+      <figure class="story-photo">
+        <img src="/assets/anon/hidden-lake.jpg" alt="A calm mountain lake below a peak, with snow on the ridges" loading="lazy">
+      </figure>
+      <div class="story">
+        <div>
+          <h2>Our story</h2>
+          <p class="sig">The developer of Murmint</p>
+        </div>
+        <div class="read">
+          <p>Hi, I'm the developer of Murmint, and I'm a typer.</p>
+          <p>Building software mostly means typing. Code all day, then commit messages, bug reports, replies on Discord, and long prompts explaining to an AI exactly what I wanted. Most days the typing took longer than the thinking. I'd have the whole idea in my head, then spend twenty minutes squeezing it out through my fingers.</p>
+          <p>I tried the dictation tools that were around. They wrote down every "um", put full stops in strange places, and when I said "eight thirty, no wait, nine thirty", they kept both. Fixing the text took longer than typing it would have.</p>
+          <p>So I built the thing I wished I had: hold two keys, say it the way it comes out, and get clean writing back, right where the cursor is. I called it Murmint. I still type. Just a lot less.</p>
+          <a class="link" href="/developers-share">Read the full share</a>
+        </div>
+      </div>
+      <div class="timeline">
+        <div><b>Before</b><span>Typing everything: code, messages, docs and prompts, all day.</span></div>
+        <div><b>The fix</b><span>One shortcut. Say it, let go, and it's written.</span></div>
+        <div><b>Open source</b><span>Every line of Murmint is on GitHub for anyone to read.</span></div>
+        <div><b>Today</b><span>In alpha on Windows 10 and 11.</span></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="today" id="today">
+    <article class="page">
+      <div class="series"><span>Just for Today</span><span id="jft-date"></span></div>
+      <h2 id="jft-title"></h2>
+      <blockquote id="jft-quote"></blockquote>
+      <cite id="jft-cite"></cite>
+      <div class="read" id="jft-body"></div>
+      <p class="jft"><b>Just for Today:</b> <span id="jft-line"></span></p>
+    </article>
+  </section>
+
+  <section class="block" id="family">
+    <div class="wrap two">
+      <div>
+        <h3>Is there a typer in your life?</h3>
+        <div class="read"><p>You hear it from the next room: the clatter, the sighing, the "one more email". You can't stop someone typing, and you can't type for them. But you can send them this page.</p></div>
+        <button class="btn solid" type="button" id="copy">Copy the link</button>
+      </div>
+      <div>
+        <h3>For workplaces and IT</h3>
+        <div class="read"><p>Murmint works in every Windows app, needs no subscription, and is open source, so you can read every line before it goes near your team.</p></div>
+        <a class="btn line" href="https://github.com/proimpacts/murmint">Read the code on GitHub</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="block" id="faq" style="padding-top:0">
+    <div class="wrap faq">
+      <h2>A newcomer asks</h2>
+      <div>
+        <details><summary>Do I have to give up my keyboard?</summary><p>No. You'll still need it for <span class="kbd">Ctrl</span> + <span class="kbd">Win</span>. We're not monsters.</p></details>
+        <details><summary>Do I have to share?</summary><p>Only when you want to. Murmint listens while you hold the keys, and stops when you let go.</p></details>
+        <details><summary>How long until I feel something?</summary><p>About two minutes. Install it, sign in, hold the keys and talk. The text appears where your cursor is.</p></details>
+        <details><summary>Can I come alone?</summary><p>Yes. Speech can run entirely on your PC with Murmint 1, and your audio is never stored.</p></details>
+        <details><summary>What does it cost?</summary><p>There's no subscription. Speech on your PC is free, and formatting uses the AI provider you choose, usually pennies a month.</p></details>
+        <details><summary>Is Typers Anonymous real?</summary><p>The group isn't. The app is, it's open source, and it's in alpha on Windows 10 and 11.</p></details>
+      </div>
+    </div>
+  </section>
+
+  <section class="close">
+    <div class="wrap">
+      <h2>Keep coming back.</h2>
+      <p>It works if you hold it. <span class="kbd">Ctrl</span> + <span class="kbd">Win</span>, whenever you're ready.</p>
+      <div class="acts"><a class="btn solid" href="/download">Download for Windows</a><a class="btn line" href="https://discord.gg/MEfdzfyARV">Join the Discord</a></div>
+    </div>
+  </section>
+</main>
+
+<footer><div class="wrap">
+  <div class="row1">
+    <a class="brand" href="/"><img src="/assets/logo.svg" alt="">Murmint</a>
+    <span class="sp"></span><a href="/privacy-policy">Privacy policy</a><a href="/terms">Terms</a><a href="https://github.com/proimpacts/murmint">GitHub</a>
+  </div>
+  <nav class="ta" aria-label="Typers Anonymous"><a href="/am-i-a-typer">Am I a typer?</a><a href="/first-meeting">Your first meeting</a><a href="/the-basic-shortcut">The Basic Shortcut</a><a href="/developers-share">A share from the developer</a></nav>
+  <div class="help">
+    <p>If you know someone who's struggling, please call a suicide or crisis hotline. Contact one of these numbers, or your local emergency services, to get them help. Resources are available.</p>
+    <ul>
+      <li><svg width="15" height="15" viewBox="0 0 24 24" aria-hidden="true"><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13.832 16.568a1 1 0 0 0 1.213-.303l.355-.465A2 2 0 0 1 17 15h3a2 2 0 0 1 2 2v3a2 2 0 0 1-2 2A18 18 0 0 1 2 4a2 2 0 0 1 2-2h3a2 2 0 0 1 2 2v3a2 2 0 0 1-.8 1.6l-.468.351a1 1 0 0 0-.292 1.233a14 14 0 0 0 6.392 6.384"/></svg>US and Canada: call or text <a href="tel:988">988</a></li>
+      <li><svg width="15" height="15" viewBox="0 0 24 24" aria-hidden="true"><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13.832 16.568a1 1 0 0 0 1.213-.303l.355-.465A2 2 0 0 1 17 15h3a2 2 0 0 1 2 2v3a2 2 0 0 1-2 2A18 18 0 0 1 2 4a2 2 0 0 1 2-2h3a2 2 0 0 1 2 2v3a2 2 0 0 1-.8 1.6l-.468.351a1 1 0 0 0-.292 1.233a14 14 0 0 0 6.392 6.384"/></svg>UK and Ireland: Samaritans, <a href="tel:116123">116 123</a></li>
+      <li><svg width="15" height="15" viewBox="0 0 24 24" aria-hidden="true"><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13.832 16.568a1 1 0 0 0 1.213-.303l.355-.465A2 2 0 0 1 17 15h3a2 2 0 0 1 2 2v3a2 2 0 0 1-2 2A18 18 0 0 1 2 4a2 2 0 0 1 2-2h3a2 2 0 0 1 2 2v3a2 2 0 0 1-.8 1.6l-.468.351a1 1 0 0 0-.292 1.233a14 14 0 0 0 6.392 6.384"/></svg>Australia: Lifeline, <a href="tel:131114">13 11 14</a></li>
+      <li><svg width="15" height="15" viewBox="0 0 24 24" aria-hidden="true"><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13.832 16.568a1 1 0 0 0 1.213-.303l.355-.465A2 2 0 0 1 17 15h3a2 2 0 0 1 2 2v3a2 2 0 0 1-2 2A18 18 0 0 1 2 4a2 2 0 0 1 2-2h3a2 2 0 0 1 2 2v3a2 2 0 0 1-.8 1.6l-.468.351a1 1 0 0 0-.292 1.233a14 14 0 0 0 6.392 6.384"/></svg>Emergencies: 911, 999 or 112</li>
+      <li>Other countries: <a href="https://findahelpline.com">findahelpline.com</a></li>
+    </ul>
+  </div>
+  <p class="parody">This is a parody website and is not real.</p>
+</div></footer>
+
+<script>
+  // the bulletin is dated today, like the reading below
+  const now = new Date();
+  const longDate = now.toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' });
+  document.getElementById('issue-date').textContent = longDate;
+
+  // keycaps press down on Enter and Space too, like a real key
+  document.querySelectorAll('.key').forEach((k) => {
+    k.addEventListener('keydown', (e) => { if (e.key === 'Enter' || e.key === ' ') k.classList.add('down'); });
+    k.addEventListener('keyup', () => k.classList.remove('down'));
+    k.addEventListener('blur', () => k.classList.remove('down'));
+  });
+
+  // just for today: a different reading each day
+  const READINGS = [
+    { title: 'Letting go of the keyboard', quote: 'We didn\'t have to type it all ourselves.', page: 12,
+      body: ['For years we believed that if a thing needed writing, our fingers had to write it. Every email, every reply, every "quick note" went through the same ten tired fingers.', 'Then someone at a meeting held two keys and simply said it. The words appeared, tidy and finished. Nobody clapped. They didn\'t need to.'],
+      line: 'I will say one message I would have typed, and let it go.' },
+    { title: 'Progress, not perfection', quote: 'The first draft can be spoken.', page: 27,
+      body: ['Many of us rewrote the same sentence four times before sending it. We weren\'t improving it. We were afraid of it.', 'Speaking takes the fear out. We say what we mean, we say "no wait" when we change our minds, and the finished words keep only what we meant.'],
+      line: 'I won\'t rewrite a sentence that was fine the first time.' },
+    { title: 'Easy does it', quote: 'Ums are welcome here.', page: 41,
+      body: ['Nobody talks in perfect paragraphs. We pause, we restart, we lose the thread and find it again. That\'s not a flaw. That\'s how people talk.', 'We don\'t have to perform for the microphone. We talk the way we talk, and the clean-up happens without us.'],
+      line: 'I will talk the way I talk.' },
+    { title: 'Asking for help', quote: 'Holding two keys is a way of asking for help.', page: 58,
+      body: ['Some of us thought typing everything ourselves was a kind of strength. Our wrists disagreed.', 'Asking for help can be as small as holding Ctrl and Win. It doesn\'t make the work less ours. It just makes it lighter.'],
+      line: 'When a long reply is due, I will hold the keys and say it.' },
+  ];
+  const day = Math.floor((now - new Date(now.getFullYear(), 0, 0)) / 864e5), r = READINGS[day % READINGS.length];
+  document.getElementById('jft-date').textContent = longDate;
+  document.getElementById('jft-title').textContent = r.title;
+  document.getElementById('jft-quote').textContent = '"' + r.quote + '"';
+  document.getElementById('jft-cite').textContent = 'The Basic Shortcut, page ' + r.page;
+  const body = document.getElementById('jft-body');
+  r.body.forEach((text) => { const p = document.createElement('p'); p.textContent = text; body.append(p); });
+  document.getElementById('jft-line').textContent = r.line;
+
+  // for family: copy this page's link
+  const copy = document.getElementById('copy');
+  copy.addEventListener('click', async () => {
+    try { await navigator.clipboard.writeText(location.href); copy.textContent = 'Link copied'; }
+    catch { copy.textContent = 'Copy failed. Use the address bar.'; }
+    setTimeout(() => { copy.textContent = 'Copy the link'; }, 2400);
+  });
+</script>
+</body>
+</html>

@@ -1,0 +1,131 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Your first meeting | Typers Anonymous</title>
+<meta name="description" content="What happens at a Typers Anonymous meeting, what to bring, and the words you'll hear.">
+<meta name="robots" content="noindex">
+<link rel="icon" href="/assets/favicon.png">
+<link rel="stylesheet" href="/assets/anon/pages.css">
+<style>
+  .sheet h2 { font-size: clamp(28px, 3.4vw, 38px); margin: 0 0 18px; }
+  .sheet section + section { margin-top: 60px; }
+  .sheet .lede { margin: 0 0 24px; color: var(--ink-2); }
+
+  /* what to bring */
+  .bring { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; }
+  .bring div { padding: 20px 18px 22px; border-radius: 20px; background: rgba(47, 74, 44, .08); }
+  .bring b { display: block; color: var(--moss); margin-bottom: 4px; }
+  .bring span { font-size: 15px; color: var(--ink-2); }
+  @media (max-width: 760px) { .bring { grid-template-columns: 1fr 1fr; } }
+
+  /* how a meeting goes, in order */
+  .order { list-style: none; margin: 0; padding: 0; counter-reset: step; }
+  .order li { counter-increment: step; display: grid; grid-template-columns: 52px 1fr; gap: 16px; padding: 18px 0; border-bottom: 1px solid var(--line); }
+  .order li::before { content: counter(step); display: grid; place-items: center; width: 40px; height: 40px; border-radius: 12px; background: var(--moss); color: #f3f6ee; font-weight: 750; }
+  .order b { display: block; font-size: 19px; letter-spacing: -.01em; }
+  .order span { color: var(--ink-2); }
+
+  /* words you'll hear */
+  .words { display: grid; grid-template-columns: 1fr 1fr; gap: 0 40px; margin: 0; }
+  .words div { padding: 16px 0; border-bottom: 1px solid var(--line); }
+  .words dt { font-weight: 700; color: var(--moss); }
+  .words dd { margin: 4px 0 0; color: var(--ink-2); font-size: 17px; }
+  @media (max-width: 760px) { .words { grid-template-columns: 1fr; } }
+
+  /* house rules */
+  .rules { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+  .rules p { margin: 0; padding: 18px 20px; border-radius: 18px; background: #f7f9f3; box-shadow: 0 0 0 1px var(--line); color: var(--ink); }
+  @media (max-width: 760px) { .rules { grid-template-columns: 1fr; } }
+</style>
+</head>
+<body>
+<header class="top">
+  <div class="wrap">
+    <a class="brand" href="/anonymous"><img src="/assets/logo.svg" alt="">Typers <span>Anonymous</span></a>
+    <nav><a href="/the-basic-shortcut">The Basic Shortcut</a><a href="/developers-share">A share from the developer</a><a href="/am-i-a-typer">Am I a typer?</a><a class="cta" href="/download">Download<span> Murmint</span></a></nav>
+  </div>
+</header>
+
+<main>
+  <section class="intro" style="--photo: url('/assets/anon/glacier.jpg')">
+    <div class="wrap">
+      <a class="crumb" href="/anonymous#first">New here?</a>
+      <h1>Your first meeting</h1>
+      <p>What happens, what to bring, and the words you'll hear. Nobody expects anything of you. You can just listen.</p>
+    </div>
+  </section>
+
+  <div class="card sheet">
+    <section>
+      <h2>Before you arrive</h2>
+      <p class="lede">You don't need much. Most people already have all of it.</p>
+      <div class="bring">
+        <div><b>A microphone</b><span>The one in your laptop or headset is fine.</span></div>
+        <div><b>Windows 10 or 11</b><span>That's where the meetings are held.</span></div>
+        <div><b>Murmint</b><span><a href="/download">A free download.</a> It takes about two minutes.</span></div>
+        <div><b>A cup of tea</b><span>Optional, but strongly encouraged.</span></div>
+      </div>
+    </section>
+
+    <section>
+      <h2>How a meeting goes</h2>
+      <ol class="order">
+        <li><div><b>Welcome</b><span>The chair says hello and reminds everyone that phones are on silent and keyboards are face down.</span></div></li>
+        <li><div><b>Introductions</b><span>"Hi, I'm Sam, and I'm a typer." You can say your name, or just "Hi, I'm new." Both get a warm "Hi" back.</span></div></li>
+        <li><div><b>The reading</b><span>Someone reads today's <a href="/anonymous#today">Just for Today</a> page out loud. Slowly. Nobody types it up.</span></div></li>
+        <li><div><b>Shares</b><span>Members talk about their week: the long email they said instead, the reply they didn't rewrite. Nobody interrupts, and nobody corrects anyone's grammar.</span></div></li>
+        <li><div><b>Keycaps</b><span>Anyone marking a milestone picks up a <a href="/anonymous#keycaps">keycap</a>. There's clapping. It's quieter than typing.</span></div></li>
+        <li><div><b>Closing</b><span>Everyone says it together: "One sentence at a time." Then more tea.</span></div></li>
+      </ol>
+    </section>
+
+    <section>
+      <h2>Words you'll hear</h2>
+      <dl class="words">
+        <div><dt>Typer</dt><dd>Anyone who types more than they'd like to. Most of us, at first.</dd></div>
+        <div><dt>Share</dt><dd>A few minutes of talking about how it's going. Always spoken, never typed.</dd></div>
+        <div><dt>Hold</dt><dd>Pressing <span class="kbd">Ctrl</span> + <span class="kbd">Win</span> and talking. The first step, every time.</dd></div>
+        <div><dt>Keycap</dt><dd>What we hand out for milestones, from "Welcome" to "Multiple years".</dd></div>
+        <div><dt>Sponsor</dt><dd>A member with a bit more time keyboard-free who'll answer your questions. Usually by voice note.</dd></div>
+        <div><dt>Slip</dt><dd>Typing out something long when you could have said it. It happens. Nobody minds.</dd></div>
+        <div><dt>Cross-talk</dt><dd>Replying in the middle of someone's share. We don't, unless it's "same".</dd></div>
+        <div><dt>The Basic Shortcut</dt><dd>Our <a href="/the-basic-shortcut">main text</a>. Most of it was dictated.</dd></div>
+      </dl>
+    </section>
+
+    <section>
+      <h2>A few gentle rules</h2>
+      <div class="rules">
+        <p>What's said here stays here.</p>
+        <p>You never have to share. Listening counts.</p>
+        <p>No correcting anyone's grammar. Murmint does that.</p>
+        <p>Please leave the loud mechanical keyboards at home. We can hear them.</p>
+      </div>
+    </section>
+
+    <div class="actions" style="margin-top:48px"><a class="btn primary" href="/anonymous#shares">Read members' shares</a><a class="btn ghost" href="/download">Download Murmint</a></div>
+  </div>
+</main>
+
+<footer><div class="wrap">
+  <div class="row">
+    <a class="brand" href="/"><img src="/assets/logo.svg" alt="">Murmint</a>
+    <span class="sp"></span><a href="/privacy-policy">Privacy policy</a><a href="/terms">Terms</a><a href="https://github.com/proimpacts/murmint">GitHub</a>
+  </div>
+  <nav class="ta-links" aria-label="Typers Anonymous"><a href="/am-i-a-typer">Am I a typer?</a><a href="/first-meeting">Your first meeting</a><a href="/the-basic-shortcut">The Basic Shortcut</a><a href="/developers-share">A share from the developer</a></nav>
+  <div class="help">
+    <p class="note">If you know someone who's struggling, please call a suicide or crisis hotline. Contact one of these numbers, or your local emergency services, to get them help. Resources are available.</p>
+    <ul>
+      <li>US and Canada: call or text <a href="tel:988">988</a></li>
+      <li>UK and Ireland: Samaritans, <a href="tel:116123">116 123</a></li>
+      <li>Australia: Lifeline, <a href="tel:131114">13 11 14</a></li>
+      <li>Emergencies: 911, 999 or 112</li>
+      <li>Other countries: <a href="https://findahelpline.com">findahelpline.com</a></li>
+    </ul>
+  </div>
+  <p class="parody">This is a parody website and is not real.</p>
+</div></footer>
+</body>
+</html>
