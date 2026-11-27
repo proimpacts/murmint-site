@@ -24,7 +24,7 @@
 <link rel="icon" href="assets/favicon.png">
 <link rel="preload" href="assets/inter-latin.woff2" as="font" type="font/woff2" crossorigin>
 <script>try{var t=localStorage.getItem("theme");if(t==="light")document.documentElement.dataset.theme=t}catch(e){}</script>
-<link rel="stylesheet" href="/style.css?v=150c532c">
+<link rel="stylesheet" href="/style.css?v=a384f733">
 </head>
 <body>
 <header class="nav">
@@ -100,7 +100,7 @@ Thanks for sending the propsal. We looked at it with the tema and want to <span 
     <div class="stage warm"><div class="stage-col"><div class="said"><span class="said-dots" aria-hidden="true"><i></i><i></i><i></i></span><span><span class="sr">You say: </span>for the trip I’m gonna need my passport, the charger, some snacks and a jacket</span></div><div class="window"><div class="win-bar"><i class="win-ico"><img src="assets/brand/word.svg" alt="" width="24" height="24"></i><b>Word</b><span class="dim">Trip plan</span><span class="win-dots"><i></i><i></i><i></i></span></div><div class="win-body">For the trip, I’m going to need:<ul><li>My passport</li><li>The charger</li><li>Some snacks</li><li>A jacket</li></ul></div></div></div></div>
   </div>
   <div class="row flip">
-    <div class="copy"><h3>Stutters and speech differences</h3><p>Murmint no longer supports accent detection. Stutters, repeated sounds and similar speech patterns are still supported: turn on Speech support.</p></div>
+    <div class="copy"><h3>Stutters and speech differences</h3><p>Turn on Speech support and stutters, repeated sounds and restarts come out as the sentence you meant.</p></div>
     <div class="stage"><div class="stage-col"><div class="said"><span class="said-dots" aria-hidden="true"><i></i><i></i><i></i></span><span><span class="sr">You say: </span>I n-n-need the, the report by F-Friday, uh, please</span></div><div class="window"><div class="win-bar"><i class="win-ico"><img src="assets/brand/slack.svg" alt="" width="24" height="24"></i><b>Slack</b><span class="dim">#team</span><span class="win-dots"><i></i><i></i><i></i></span></div><div class="win-body">I need the report by Friday, please.</div></div></div></div>
   </div>
 </section>
@@ -112,8 +112,8 @@ Thanks for sending the propsal. We looked at it with the tema and want to <span 
 
 <section class="wrap">
   <div class="row flip">
-    <div class="copy"><h3>Better prompts for your AI</h3><p>Talk to Claude, ChatGPT or Cursor the way you think. Murmint turns it into a clear, numbered prompt, and adds nothing you didn’t say.</p></div>
-    <div class="stage warm"><div class="stage-col"><div class="said"><span class="said-dots" aria-hidden="true"><i></i><i></i><i></i></span><span><span class="sr">You say: </span>I need you to update my dashboard make the sidebar collapsible improve the mobile layout and don't change the colors</span></div><div class="window"><div class="win-bar"><i class="win-ico"><img src="assets/brand/claude.svg" alt="" width="24" height="24"></i><b>Claude</b><span class="dim">New chat</span><span class="win-dots"><i></i><i></i><i></i></span></div><div class="win-body">Update my dashboard:<ol><li>Make the sidebar collapsible.</li><li>Improve the mobile layout.</li></ol>Don’t:<ul><li>Change the colors.</li></ul></div></div></div></div>
+    <div class="copy"><h3>Better prompts for your AI</h3><p>Ramble to Claude Code, ChatGPT, Copilot or Cursor the way you think. Murmint turns it into a prompt an AI can act on: the goal first, each request as a clear step, then context and what not to touch. It adds nothing you didn’t say.</p></div>
+    <div class="stage warm"><div class="stage-col"><div class="said"><span class="said-dots" aria-hidden="true"><i></i><i></i><i></i></span><span><span class="sr">You say: </span>um so the dashboard is kind of slow on my phone since we added the charts, can you make the sidebar collapsible and fix the mobile layout, oh and don't change the colors</span></div><div class="window"><div class="win-bar"><i class="win-ico"><img src="assets/brand/claude.svg" alt="" width="24" height="24"></i><b>Claude</b><span class="dim">New chat</span><span class="win-dots"><i></i><i></i><i></i></span></div><div class="win-body">Improve the dashboard on mobile.<ol><li>Make the sidebar collapsible.</li><li>Fix the mobile layout.</li></ol>Context:<ul><li>The dashboard has been slow on phones since the charts were added.</li></ul>Don’t:<ul><li>Change the colors.</li></ul></div></div></div></div>
   </div>
   <div class="row">
     <div class="copy"><h3>Emails that look like emails</h3><p>In an email app you get a greeting on its own line, short paragraphs and a sign-off, without saying any of the formatting.</p></div>
@@ -125,7 +125,27 @@ Thanks for sending the propsal. We looked at it with the tema and want to <span 
   </div>
   <div class="duo">
     <div><div class="stage"><div class="window"><div class="win-bar"><i class="win-ico"><img src="assets/logo.svg" alt="" width="20" height="20"></i><b>Murmint</b><span class="dim">Rules</span><span class="win-dots"><i></i><i></i><i></i></span></div><div class="win-body"><div class="rule">Use British spelling<span class="switch on"></span></div><div class="rule">Never use exclamation marks<span class="switch on"></span></div><div class="rule">Sign emails "Cheers, Sam"<span class="switch"></span></div></div></div></div><h3>Your own rules</h3><p>Add a rule and Murmint follows it every time. Switch one off without deleting it.</p></div>
-    <div><div class="stage warm"><div class="window"><div class="win-bar"><i class="win-ico"><img src="assets/logo.svg" alt="" width="20" height="20"></i><b>Murmint</b><span class="dim">Vocabulary</span><span class="win-dots"><i></i><i></i><i></i></span></div><div class="win-body"><div class="word"><b>Kubernetes</b><span class="tag">Recorded</span></div><div class="heard"><span>Normal</span><em>Kubernetes</em><span>Quiet</span><em>cooper netties</em><span>Fast</span><em>kubernetes</em><span>Slow</span><em>Kubernetes</em><span>Loud</span><em>Kubernetes</em></div></div></div></div><h3>Words you teach it</h3><p>Say a name five ways and it's spelled right however you say it. Nothing is ever added on its own.</p></div>
+    <div><div class="stage warm"><div class="window"><div class="win-bar"><i class="win-ico"><img src="assets/logo.svg" alt="" width="20" height="20"></i><b>Murmint</b><span class="dim">Vocabulary</span><span class="win-dots"><i></i><i></i><i></i></span></div><div class="win-body"><div class="word"><b>Kubernetes</b><span class="tag">Suggested</span></div><div class="word"><b>Priya</b><span class="tag">Suggested</span></div><div class="word"><b>Supabase</b><span class="tag">Added</span></div></div></div></div><h3>It learns your words</h3><p>Murmint notices the names and terms you keep saying and suggests them. Add one with a click and it's spelled right from then on. Nothing is added without you.</p></div>
+  </div>
+</section>
+
+<section class="chapter wrap">
+  <h2>More</h2>
+  <p>Tools that save you from the keyboard even when you're not talking.</p>
+</section>
+
+<section class="wrap">
+  <div class="row">
+    <div class="copy"><h3>Every app gets its own setup</h3><p>Murmint knows which app is in front. On the Apps page, give any app its own style, strength and rules, or pick from presets for Discord, Gmail, VS Code and more.</p></div>
+    <div class="stage"><div class="window"><div class="win-bar"><i class="win-ico"><img src="assets/logo.svg" alt="" width="20" height="20"></i><b>Murmint</b><span class="dim">Apps</span><span class="win-dots"><i></i><i></i><i></i></span></div><div class="win-body"><div class="rule">Discord<span class="dim">Casual</span></div><div class="rule">Gmail<span class="dim">Professional</span></div><div class="rule">VS Code<span class="dim">Technical</span></div><div class="rule">Word<span class="dim">Natural</span></div></div></div></div>
+  </div>
+  <div class="row flip">
+    <div class="copy"><h3>Picks up where you left off</h3><p>Turn on message context and Murmint reads the text already in the box, so a sentence you continue stays lowercase and matches the tone of what's there.</p></div>
+    <div class="stage warm"><div class="stage-col"><div class="said"><span class="said-dots" aria-hidden="true"><i></i><i></i><i></i></span><span><span class="sr">You say: </span>and the notes from today</span></div><div class="window"><div class="win-bar"><i class="win-ico"><img src="assets/brand/slack.svg" alt="" width="24" height="24"></i><b>Slack</b><span class="dim">#team</span><span class="win-dots"><i></i><i></i><i></i></span></div><div class="win-body">I'll send the slides, and the notes from today.</div></div></div></div>
+  </div>
+  <div class="duo">
+    <div><div class="stage"><div class="window"><div class="win-bar"><i class="win-ico"><img src="assets/logo.svg" alt="" width="20" height="20"></i><b>Murmint</b><span class="dim">Better Clipboard</span><span class="win-dots"><i></i><i></i><i></i></span></div><div class="win-body"><div class="rule">Meeting moved to 3pm<span class="dim">Pinned</span></div><div class="rule">github.com/proimpacts/murmint<span class="dim">2 min ago</span></div><div class="rule">😀 🎉 ❤️ 👍<span class="dim">Emoji</span></div></div></div></div><h3>Better Clipboard</h3><p>Everything you copy, text and images, with search and pins, plus a full emoji picker with every flag. Pick one and it's pasted where you were typing.</p></div>
+    <div><div class="stage warm"><div class="window"><div class="win-bar"><i class="win-ico"><img src="assets/logo.svg" alt="" width="20" height="20"></i><b>Murmint</b><span class="dim">Shortcuts</span><span class="win-dots"><i></i><i></i><i></i></span></div><div class="win-body"><div class="rule">Format selection<span class="dim">Tidy any text</span></div><div class="rule">Translate selection<span class="dim">Into your language</span></div><div class="rule">Live transcription<span class="dim">See words as you speak</span></div></div></div></div><h3>Select, then fix or translate</h3><p>Highlight text anywhere and one shortcut cleans it up or translates it in place. Live transcription shows your words while you're still talking.</p></div>
   </div>
 </section>
 
@@ -140,7 +160,7 @@ Thanks for sending the propsal. We looked at it with the tema and want to <span 
     <div class="stage"><div class="window"><div class="win-bar"><i class="win-ico"><img src="assets/logo.svg" alt="" width="20" height="20"></i><b>Murmint</b><span class="dim">Models</span><span class="win-dots"><i></i><i></i><i></i></span></div><div class="win-body"><div class="providers"><span class="prov"><i class="logo"><img src="assets/brand/openai.svg" alt="" width="24" height="24"></i><b>OpenAI<small>Speech and text</small></b></span><span class="prov"><i class="logo"><img src="assets/brand/groq.svg" alt="" width="24" height="24"></i><b>Groq<small>Speech and text</small></b></span><span class="prov"><i class="logo"><img src="assets/brand/cloudflare.svg" alt="" width="24" height="24"></i><b>Cloudflare<small>Speech and text</small></b></span><span class="prov"><i class="logo"><img src="assets/brand/claude.svg" alt="" width="24" height="24"></i><b>Claude<small>Text</small></b></span><span class="prov"><i class="logo"><img src="assets/brand/mistral.svg" alt="" width="24" height="24"></i><b>Mistral<small>Text</small></b></span><span class="prov"><i class="logo"><img src="assets/brand/gemini.png" alt="" width="24" height="24"></i><b>Gemini<small>Text</small></b></span><span class="prov"><i class="logo"><img src="assets/brand/openrouter.svg" alt="" width="24" height="24"></i><b>OpenRouter<small>Text</small></b></span><span class="prov"><i class="logo"><img src="assets/brand/deepseek.svg" alt="" width="24" height="24"></i><b>DeepSeek<small>Text</small></b></span><span class="prov"><i class="logo"><img src="assets/brand/ollama.svg" alt="" width="24" height="24"></i><b>Ollama<small>On your PC</small></b></span></div></div></div></div>
   </div>
   <div class="row flip">
-    <div class="copy"><h3>Settings that make sense</h3><p>Shortcuts with any number of keys, words to avoid, history with the date and time of every dictation, this month's spend on Home, and a small pill near the edge of your screen that stays out of the way.</p></div>
+    <div class="copy"><h3>Settings that make sense</h3><p>Shortcuts with any number of keys, hands-free mode, undo for the last insertion, history with the date and time of every dictation, this month's spend on Home, and a small pill near the edge of your screen that hides while a video or game is full screen.</p></div>
     <div class="stage"><div class="window"><div class="win-bar"><i class="win-ico"><img src="assets/logo.svg" alt="" width="20" height="20"></i><b>Murmint</b><span class="dim">Shortcuts</span><span class="win-dots"><i></i><i></i><i></i></span></div><div class="win-body"><div class="rule">Dictate<span><span class="kbd">Ctrl</span> + <span class="kbd">Win</span></span></div><div class="rule">Hands-free<span><span class="kbd">Ctrl</span> + <span class="kbd">Alt</span> + <span class="kbd">D</span></span></div><div class="rule">Cancel<span class="kbd">Esc</span></div><div class="rule">Undo the last insertion<span><span class="kbd">Ctrl</span> + <span class="kbd">Alt</span> + <span class="kbd">Z</span></span></div></div></div></div>
   </div>
 </section>
@@ -176,7 +196,7 @@ Thanks for sending the propsal. We looked at it with the tema and want to <span 
   <div class="privacy">
     <div><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg><h3>No audio kept</h3><p>Your voice goes to the speech provider you chose while you dictate. Murmint never stores it.</p></div>
     <div><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="7.5" cy="15.5" r="4.5"/><path d="m10.7 12.3 9.8-9.8M16 7l3 3"/></svg><h3>Keys stay on your PC</h3><p>API keys are encrypted with Windows and only ever sent to their own provider.</p></div>
-    <div><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="2" y="4" width="20" height="13" rx="2"/><path d="M8 21h8M12 17v4"/></svg><h3>Fully local if you want</h3><p>Use a model on your PC through Ollama or LM Studio, and your text never leaves it.</p></div>
+    <div><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="2" y="4" width="20" height="13" rx="2"/><path d="M8 21h8M12 17v4"/></svg><h3>Fully local if you want</h3><p>Run speech recognition on your PC and format with Ollama or LM Studio, and nothing you say leaves it.</p></div>
   </div>
 </section>
 
@@ -232,6 +252,6 @@ Thanks for sending the propsal. We looked at it with the tema and want to <span 
 </footer>
 <div class="theme" role="group" aria-label="Colour theme"><button type="button" data-theme-set="light" aria-label="Light theme"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></svg></button><button type="button" data-theme-set="dark" aria-label="Dark theme"><svg viewBox="0 0 24 24"><path d="M21 12.8A9 9 0 1 1 11.2 3 7 7 0 0 0 21 12.8Z"/></svg></button></div>
 <div class="alpha-pop" id="alpha-pop" role="dialog" aria-label="Closed alpha" hidden><span class="alpha-dot"></span><div><b>Murmint is in closed alpha</b><p>Things are still changing. Sign in with Discord to join the testers and download.</p><div class="alpha-actions"><a class="btn primary small" href="/auth/discord">Join with Discord</a><button type="button" class="btn ghost small" id="alpha-close">Maybe later</button></div></div></div>
-<script src="/script.js?v=150c532c"></script>
+<script src="/script.js?v=a384f733"></script>
 </body>
 </html>
